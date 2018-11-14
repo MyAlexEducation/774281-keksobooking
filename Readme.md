@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Александр Цыганчук](https://up.htmlacademy.ru/javascript/16/user/774281).
-* Наставник: [Сергей Рубец] (https://htmlacademy.ru/profile/amator).
+* Наставник: [Сергей Рубец](https://htmlacademy.ru/profile/amator).
 
 ---
 
