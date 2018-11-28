@@ -1,5 +1,6 @@
 'use strict';
 
+var NUMBER_ADS;
 var PATH_AVATAR_IMGS = 'img/avatars/';
 var MIN_PRICE = 1000;
 var MAX_PRICE = 1000000;
