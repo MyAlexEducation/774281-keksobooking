@@ -17,7 +17,9 @@ var MAX_LOCATION_X = 630;
 var MIN_LOCATION_Y = 130;
 var MAX_LOCATION_Y = 630;
 
+var fragment = document.createDocumentFragment();
 var map = document.querySelector('.map');
+var mapPin = document.querySelector('#pin');
 
 var avatarImgs = ['01.png', '02.png', '03.png', '04.png', '05.png', '06.png', '07.png', '08.png'];
 var titles = ['Большая уютная квартира', 'Маленькая неуютная квартира',
