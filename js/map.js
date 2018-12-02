@@ -19,9 +19,10 @@ var MAX_LOCATION_Y = 630;
 
 var fragment = document.createDocumentFragment();
 var map = document.querySelector('.map');
-var mapPin = document.querySelector('#pin');
+var pinsContainer = document.querySelector('.map__pins');
+var mapPinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
 
-var avatarImgs = ['01.png', '02.png', '03.png', '04.png', '05.png', '06.png', '07.png', '08.png'];
+var avatarImgs = ['user01.png', 'user02.png', 'user03.png', 'user04.png', 'user05.png', 'user06.png', 'user07.png', 'user08.png'];
 var titles = ['Большая уютная квартира', 'Маленькая неуютная квартира',
   'Огромный прекрасный дворец', 'Маленький ужасный дворец', 'Красивый гостевой домик',
   'Некрасивый негостеприимный домик', 'Уютное бунгало далеко от моря', 'Неуютное бунгало по колено в воде'];
@@ -80,6 +81,29 @@ var Building = function (i) {
   this.offer = new Offer(i);
   this.location = new Location();
 };
+var addLocationPin = function (pin, building) {
+  pin.style.left = building.location.x.toString() + 'px';
+  pin.style.top = building.location.y.toString() + 'px';
+};
+var addInfoPin = function (pin, building) {
+  var imgPin = pin.querySelector('img');
+  imgPin.src = building.author.avatar;
+  imgPin.alt = building.offer.title;
+};
+var createPins = function (buildingsList) {
+  for (var i = 0; i < buildingsList.length; i++) {
+    var pinElement = mapPinTemplate.cloneNode(true);
+    addLocationPin(pinElement, buildingsList[i]);
+    addInfoPin(pinElement, buildingsList[i]);
+    fragment.appendChild(pinElement);
+  }
+};
+var showPins = function () {
+  pinsContainer.appendChild(fragment);
+};
 
 fillArray(buildings, Building, NUMBER_ADS);
+createPins(buildings);
 map.classList.remove('map--faded');
+showPins();
+
