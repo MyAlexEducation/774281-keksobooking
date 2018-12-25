@@ -25,7 +25,7 @@ var pinsContainer = document.querySelector('.map__pins');
 var mapPinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
 var mapFiltersContainer = document.querySelector('.map__filters-container');
 
-var cardTamplate = document.querySelector('#card').content.querySelector('.map__card');
+var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
 
 var avatarImgs = ['user01.png', 'user02.png', 'user03.png', 'user04.png', 'user05.png', 'user06.png', 'user07.png', 'user08.png'];
 var titles = ['Большая уютная квартира', 'Маленькая неуютная квартира',
@@ -130,7 +130,7 @@ var createPins = function (buildingsList) {
 };
 var createCards = function (buildingsList) {
   for (var i = 0; i < NUMBER_CARDS; i++) {
-    var cardElement = cardTamplate.cloneNode(true);
+    var cardElement = cardTemplate.cloneNode(true);
     addInfoCard(cardElement, buildingsList[i]);
     fragment.appendChild(cardElement);
   }
