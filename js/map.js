@@ -26,6 +26,9 @@ var mapPinTemplate = document.querySelector('#pin').content.querySelector('.map_
 var mapFiltersContainer = document.querySelector('.map__filters-container');
 var mainPin = document.querySelector('.map__pin--main');
 
+var adForm = document.querySelector('.ad-form');
+var adFormAddress = adForm.querySelector('#address');
+
 var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
 
 var avatarImgs = ['user01.png', 'user02.png', 'user03.png', 'user04.png', 'user05.png', 'user06.png', 'user07.png', 'user08.png'];
