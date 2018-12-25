@@ -147,7 +147,10 @@ var showCards = function () {
 };
 
 fillArray(buildings, Building, NUMBER_ADS);
-showMap();
+mainPin.addEventListener('mouseup', function () {
+  showMap();
+});
+
 
 createPins(buildings);
 showPins();
