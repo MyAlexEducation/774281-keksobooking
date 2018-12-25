@@ -148,10 +148,14 @@ var showPins = function () {
 var showCards = function () {
   map.insertBefore(fragment, mapFiltersContainer);
 };
+var showAdForm = function () {
+  adForm.classList.remove('ad-form--disabled');
+};
 
 fillArray(buildings, Building, NUMBER_ADS);
 mainPin.addEventListener('mouseup', function () {
   showMap();
+  showAdForm();
 });
 
 
