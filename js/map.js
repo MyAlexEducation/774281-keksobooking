@@ -24,6 +24,7 @@ var map = document.querySelector('.map');
 var pinsContainer = document.querySelector('.map__pins');
 var mapPinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
 var mapFiltersContainer = document.querySelector('.map__filters-container');
+var mainPin = document.querySelector('.map__pin--main');
 
 var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
 
