@@ -97,7 +97,7 @@ var Building = function (i) {
 };
 var addLocationPin = function (pin, building) {
   pin.style.left = (building.location.x - WIDTH_PIN / 2).toString() + 'px';
-  pin.style.top = (building.location.y + HEIGHT_PIN).toString() + 'px';
+  pin.style.top = (building.location.y - HEIGHT_PIN).toString() + 'px';
 };
 var addInfoPin = function (pin, building) {
   var imgPin = pin.querySelector('img');
@@ -162,6 +162,7 @@ var showAdForm = function () {
 
 fillArray(buildings, Building, NUMBER_ADS);
 
+adFormAddress.value = WIDTH_MAP / 2 + ',' + HEIGHT_MAP / 2;
 mainPin.addEventListener('mouseup', function () {
   showMap();
   showAdForm();
