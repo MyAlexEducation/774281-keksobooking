@@ -168,9 +168,16 @@ mainPin.addEventListener('mouseup', function () {
   showMap();
   showAdForm();
 });
+map.addEventListener('click', function (evt) {
+  var target = evt.target;
+  while (target !== map) {
+    if (target.hasAttribute('data--pin-index')) {
+      createCards(buildings);
+      showCards();
+    }
+    target = target.parentNode;
+  }
+});
 
 createPins(buildings);
 showPins();
-
-createCards(buildings);
-showCards();
