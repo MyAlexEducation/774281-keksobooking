@@ -141,12 +141,10 @@ var createPins = function (buildingsList) {
     fragment.appendChild(pinElement);
   }
 };
-var createCards = function (buildingsList) {
-  for (var i = 0; i < NUMBER_CARDS; i++) {
-    var cardElement = cardTemplate.cloneNode(true);
-    addInfoCard(cardElement, buildingsList[i]);
-    fragment.appendChild(cardElement);
-  }
+var createCards = function (buildingsList, index) {
+  var cardElement = cardTemplate.cloneNode(true);
+  addInfoCard(cardElement, buildingsList[index]);
+  fragment.appendChild(cardElement);
 };
 var showMap = function () {
   map.classList.remove('map--faded');
@@ -172,7 +170,7 @@ map.addEventListener('click', function (evt) {
   var target = evt.target;
   while (target !== map) {
     if (target.hasAttribute('data--pin-index')) {
-      createCards(buildings);
+      createCards(buildings, parseInt(target.dataset.PinIndex, 10));
       showCards();
     }
     target = target.parentNode;
