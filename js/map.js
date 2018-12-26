@@ -1,7 +1,6 @@
 'use strict';
 
 var NUMBER_ADS = 8;
-var NUMBER_CARDS = 1;
 var PATH_AVATAR_IMGS = 'img/avatars/';
 var MIN_ADDRESS_X = 0;
 var MAX_ADDRESS_X = 1000;
@@ -31,8 +30,6 @@ var WIDTH_MAP = map.offsetWidth;
 var HEIGHT_MAP = map.offsetHeight;
 var WIDTH_PIN = 50; // как в случае тега template узнать размеры дочерних элементов? установка display не помогает.
 var HEIGHT_PIN = 70;
-var WIDTH_MAIN_PIN = mainPin.offsetWidth;
-var HEIGHT_MAIN_PIN = mainPin.offsetHeight;
 
 var adForm = document.querySelector('.ad-form');
 var adFormAddress = adForm.querySelector('#address');
