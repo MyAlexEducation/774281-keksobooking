@@ -35,6 +35,8 @@ var adForm = document.querySelector('.ad-form');
 var adFormAddress = adForm.querySelector('#address');
 
 var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
+var currentCard = cardTemplate;
+var cardClose = cardTemplate.querySelector('.popup__close');
 
 var avatarImgs = ['user01.png', 'user02.png', 'user03.png', 'user04.png', 'user05.png', 'user06.png', 'user07.png', 'user08.png'];
 var titles = ['Большая уютная квартира', 'Маленькая неуютная квартира',
@@ -171,6 +173,12 @@ map.addEventListener('click', function (evt) {
     if (target.hasAttribute('data--pin-index')) {
       createCards(buildings, parseInt(target.dataset.PinIndex, 10));
       showCards();
+      currentCard.remove();
+      currentCard = map.querySelector('.map__card');
+      cardClose = map.querySelector('.popup__close');
+      cardClose.addEventListener('click', function () {
+        currentCard.style.display = 'none';
+      });
     }
     target = target.parentNode;
   }
