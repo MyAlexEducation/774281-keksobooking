@@ -179,6 +179,7 @@ map.addEventListener('click', function (evt) {
       cardClose.addEventListener('click', function () {
         currentCard.style.display = 'none';
       });
+      adFormAddress.value = currentCard.querySelector('.popup__text--address').innerHTML;
     }
     target = target.parentNode;
   }
