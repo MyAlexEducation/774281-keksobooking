@@ -160,11 +160,13 @@ var showAdForm = function () {
 };
 
 fillArray(buildings, Building, NUMBER_ADS);
+createPins(buildings);
 
 adFormAddress.value = WIDTH_MAP / 2 + ',' + HEIGHT_MAP / 2;
 mainPin.addEventListener('mouseup', function () {
   showMap();
   showAdForm();
+  showPins();
 });
 map.addEventListener('click', function (evt) {
   var target = evt.target;
@@ -176,6 +178,3 @@ map.addEventListener('click', function (evt) {
     target = target.parentNode;
   }
 });
-
-createPins(buildings);
-showPins();
