@@ -1,7 +1,6 @@
 'use strict';
 
 var NUMBER_ADS = 8;
-var NUMBER_CARDS = 1;
 var PATH_AVATAR_IMGS = 'img/avatars/';
 var MIN_ADDRESS_X = 0;
 var MAX_ADDRESS_X = 1000;
@@ -13,7 +12,7 @@ var MIN_ROOMS = 1;
 var MAX_ROOMS = 5;
 var MIN_GUESTS = 0;
 var MAX_GUESTS = 100;
-var MIN_LOCATION_X = 130; // как получить размеры блока?
+var MIN_LOCATION_X = 130;
 var MAX_LOCATION_X = 630;
 var MIN_LOCATION_Y = 130;
 var MAX_LOCATION_Y = 630;
@@ -22,10 +21,22 @@ var fragment = document.createDocumentFragment();
 
 var map = document.querySelector('.map');
 var pinsContainer = document.querySelector('.map__pins');
-var mapPinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
+var mapPinTemplateContainer = document.querySelector('#pin');
+var mapPinTemplate = mapPinTemplateContainer.content.querySelector('.map__pin');
 var mapFiltersContainer = document.querySelector('.map__filters-container');
+var mainPin = document.querySelector('.map__pin--main');
 
-var cardTamplate = document.querySelector('#card').content.querySelector('.map__card');
+var WIDTH_MAP = map.offsetWidth;
+var HEIGHT_MAP = map.offsetHeight;
+var WIDTH_PIN = 50; // как в случае тега template узнать размеры дочерних элементов? установка display не помогает.
+var HEIGHT_PIN = 70;
+
+var adForm = document.querySelector('.ad-form');
+var adFormAddress = adForm.querySelector('#address');
+
+var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
+var currentCard = cardTemplate;
+var cardClose = cardTemplate.querySelector('.popup__close');
 
 var avatarImgs = ['user01.png', 'user02.png', 'user03.png', 'user04.png', 'user05.png', 'user06.png', 'user07.png', 'user08.png'];
 var titles = ['Большая уютная квартира', 'Маленькая неуютная квартира',
@@ -84,8 +95,8 @@ var Building = function (i) {
   this.location = new Location();
 };
 var addLocationPin = function (pin, building) {
-  pin.style.left = building.location.x.toString() + 'px';
-  pin.style.top = building.location.y.toString() + 'px';
+  pin.style.left = (building.location.x - WIDTH_PIN / 2).toString() + 'px';
+  pin.style.top = (building.location.y - HEIGHT_PIN).toString() + 'px';
 };
 var addInfoPin = function (pin, building) {
   var imgPin = pin.querySelector('img');
@@ -125,15 +136,14 @@ var createPins = function (buildingsList) {
     var pinElement = mapPinTemplate.cloneNode(true);
     addLocationPin(pinElement, buildingsList[i]);
     addInfoPin(pinElement, buildingsList[i]);
+    pinElement.dataset.PinIndex = i.toString();
     fragment.appendChild(pinElement);
   }
 };
-var createCards = function (buildingsList) {
-  for (var i = 0; i < NUMBER_CARDS; i++) {
-    var cardElement = cardTamplate.cloneNode(true);
-    addInfoCard(cardElement, buildingsList[i]);
-    fragment.appendChild(cardElement);
-  }
+var createCards = function (buildingsList, index) {
+  var cardElement = cardTemplate.cloneNode(true);
+  addInfoCard(cardElement, buildingsList[index]);
+  fragment.appendChild(cardElement);
 };
 var showMap = function () {
   map.classList.remove('map--faded');
@@ -144,12 +154,33 @@ var showPins = function () {
 var showCards = function () {
   map.insertBefore(fragment, mapFiltersContainer);
 };
+var showAdForm = function () {
+  adForm.classList.remove('ad-form--disabled');
+};
 
 fillArray(buildings, Building, NUMBER_ADS);
-showMap();
-
 createPins(buildings);
-showPins();
 
-createCards(buildings);
-showCards();
+adFormAddress.value = WIDTH_MAP / 2 + ',' + HEIGHT_MAP / 2;
+mainPin.addEventListener('mouseup', function () {
+  showMap();
+  showAdForm();
+  showPins();
+});
+map.addEventListener('click', function (evt) {
+  var target = evt.target;
+  while (target !== map) {
+    if (target.hasAttribute('data--pin-index')) {
+      createCards(buildings, parseInt(target.dataset.PinIndex, 10));
+      showCards();
+      currentCard.remove();
+      currentCard = map.querySelector('.map__card');
+      cardClose = map.querySelector('.popup__close');
+      cardClose.addEventListener('click', function () {
+        currentCard.style.display = 'none';
+      });
+      adFormAddress.value = currentCard.querySelector('.popup__text--address').innerHTML;
+    }
+    target = target.parentNode;
+  }
+});
