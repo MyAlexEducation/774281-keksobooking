@@ -27,9 +27,11 @@ var mapPinTemplate = mapPinTemplateContainer.content.querySelector('.map__pin');
 var mapFiltersContainer = document.querySelector('.map__filters-container');
 var mainPin = document.querySelector('.map__pin--main');
 
-var WITH_PIN = 50; // как в случае тега template узнать размеры дочерних элементов? установка display не помогает.
+var WIDTH_MAP = map.offsetWidth;
+var HEIGHT_MAP = map.offsetHeight;
+var WIDTH_PIN = 50; // как в случае тега template узнать размеры дочерних элементов? установка display не помогает.
 var HEIGHT_PIN = 70;
-var WITH_MAIN_PIN = mainPin.offsetWidth;
+var WIDTH_MAIN_PIN = mainPin.offsetWidth;
 var HEIGHT_MAIN_PIN = mainPin.offsetHeight;
 
 var adForm = document.querySelector('.ad-form');
@@ -94,7 +96,7 @@ var Building = function (i) {
   this.location = new Location();
 };
 var addLocationPin = function (pin, building) {
-  pin.style.left = (building.location.x - WITH_PIN / 2).toString() + 'px';
+  pin.style.left = (building.location.x - WIDTH_PIN / 2).toString() + 'px';
   pin.style.top = (building.location.y + HEIGHT_PIN).toString() + 'px';
 };
 var addInfoPin = function (pin, building) {
