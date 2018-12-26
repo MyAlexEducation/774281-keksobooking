@@ -13,7 +13,7 @@ var MIN_ROOMS = 1;
 var MAX_ROOMS = 5;
 var MIN_GUESTS = 0;
 var MAX_GUESTS = 100;
-var MIN_LOCATION_X = 130; // как получить размеры блока?
+var MIN_LOCATION_X = 130;
 var MAX_LOCATION_X = 630;
 var MIN_LOCATION_Y = 130;
 var MAX_LOCATION_Y = 630;
@@ -22,9 +22,15 @@ var fragment = document.createDocumentFragment();
 
 var map = document.querySelector('.map');
 var pinsContainer = document.querySelector('.map__pins');
-var mapPinTemplate = document.querySelector('#pin').content.querySelector('.map__pin');
+var mapPinTemplateContainer = document.querySelector('#pin');
+var mapPinTemplate = mapPinTemplateContainer.content.querySelector('.map__pin');
 var mapFiltersContainer = document.querySelector('.map__filters-container');
 var mainPin = document.querySelector('.map__pin--main');
+
+var WITH_PIN = 50; // как в случае тега template узнать размеры дочерних элементов? установка display не помогает.
+var HEIGHT_PIN = 70;
+var WITH_MAIN_PIN = mainPin.offsetWidth;
+var HEIGHT_MAIN_PIN = mainPin.offsetHeight;
 
 var adForm = document.querySelector('.ad-form');
 var adFormAddress = adForm.querySelector('#address');
@@ -153,11 +159,11 @@ var showAdForm = function () {
 };
 
 fillArray(buildings, Building, NUMBER_ADS);
+
 mainPin.addEventListener('mouseup', function () {
   showMap();
   showAdForm();
 });
-
 
 createPins(buildings);
 showPins();
