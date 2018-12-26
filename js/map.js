@@ -137,6 +137,7 @@ var createPins = function (buildingsList) {
     var pinElement = mapPinTemplate.cloneNode(true);
     addLocationPin(pinElement, buildingsList[i]);
     addInfoPin(pinElement, buildingsList[i]);
+    pinElement.dataset.PinIndex = i.toString();
     fragment.appendChild(pinElement);
   }
 };
