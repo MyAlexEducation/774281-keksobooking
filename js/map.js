@@ -94,8 +94,8 @@ var Building = function (i) {
   this.location = new Location();
 };
 var addLocationPin = function (pin, building) {
-  pin.style.left = building.location.x.toString() + 'px';
-  pin.style.top = building.location.y.toString() + 'px';
+  pin.style.left = (building.location.x - WITH_PIN / 2).toString() + 'px';
+  pin.style.top = (building.location.y + HEIGHT_PIN).toString() + 'px';
 };
 var addInfoPin = function (pin, building) {
   var imgPin = pin.querySelector('img');
