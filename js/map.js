@@ -33,6 +33,8 @@ var HEIGHT_PIN = 70;
 
 var adForm = document.querySelector('.ad-form');
 var adFormAddress = adForm.querySelector('#address');
+var adFormRoomNumber = adForm.querySelector('#room_number');
+var adFormCapacity = adForm.querySelector('#capacity');
 
 var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
 var currentCard = cardTemplate;
