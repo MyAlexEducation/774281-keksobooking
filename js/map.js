@@ -225,3 +225,10 @@ adFormRoomNumber.addEventListener('change', function () {
     adFormCapacity.target.setCustomValidity('');
   }
 });
+adFormCapacity.addEventListener('change', function () {
+  var indexSelected = adFormCapacity.options.selectedIndex;
+  var selectCapacityOption = adFormCapacity.options[indexSelected];
+  if ((selectCapacityOption.disabled === false)) {
+    adFormCapacity.setCustomValidity('');
+  }
+});
