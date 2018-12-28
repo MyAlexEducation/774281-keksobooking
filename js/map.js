@@ -191,3 +191,37 @@ adFormCapacity.options[0].disabled = true;
 adFormCapacity.options[1].disabled = true;
 adFormCapacity.options[2].selected = true;
 adFormCapacity.options[3].disabled = true;
+adFormRoomNumber.addEventListener('change', function () {
+  if (adFormRoomNumber.options.selectedIndex === 0) {
+    adFormCapacity.options[0].disabled = true;
+    adFormCapacity.options[1].disabled = true;
+    adFormCapacity.options[2].disabled = false;
+    adFormCapacity.options[3].disabled = true;
+  } else
+  if (adFormRoomNumber.options.selectedIndex === 1) {
+    adFormCapacity.options[0].disabled = true;
+    adFormCapacity.options[1].disabled = false;
+    adFormCapacity.options[2].disabled = false;
+    adFormCapacity.options[3].disabled = true;
+  } else
+  if (adFormRoomNumber.options.selectedIndex === 2) {
+    adFormCapacity.options[0].disabled = false;
+    adFormCapacity.options[1].disabled = false;
+    adFormCapacity.options[2].disabled = false;
+    adFormCapacity.options[3].disabled = true;
+  } else
+  if (adFormRoomNumber.options.selectedIndex === 3) {
+    adFormCapacity.options[0].disabled = true;
+    adFormCapacity.options[1].disabled = true;
+    adFormCapacity.options[2].disabled = true;
+    adFormCapacity.options[3].disabled = false;
+  }
+
+  var indexSelected = adFormCapacity.options.selectedIndex;
+  var selectCapacityOption = adFormCapacity.options[indexSelected];
+  if ((selectCapacityOption.disabled === true)) {
+    adFormCapacity.setCustomValidity('Неверное количество мест');
+  } else {
+    adFormCapacity.target.setCustomValidity('');
+  }
+});
