@@ -186,3 +186,8 @@ map.addEventListener('click', function (evt) {
     target = target.parentNode;
   }
 });
+
+adFormCapacity.options[0].disabled = true;
+adFormCapacity.options[1].disabled = true;
+adFormCapacity.options[2].selected = true;
+adFormCapacity.options[3].disabled = true;
