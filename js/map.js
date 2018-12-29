@@ -234,3 +234,25 @@ adFormCapacity.addEventListener('change', function () {
     adFormCapacity.setCustomValidity('');
   }
 });
+
+adFormType.options[1].selected = true;
+adFormPrice.min = 1000;
+adFormPrice.placeholder = '1000';
+adFormType.addEventListener('change', function () {
+  if (adFormType.options.selectedIndex === 0) {
+    adFormPrice.min = 0;
+    adFormPrice.placeholder = '0';
+  } else
+  if (adFormType.options.selectedIndex === 1) {
+    adFormPrice.min = 1000;
+    adFormPrice.placeholder = '1000';
+  } else
+  if (adFormType.options.selectedIndex === 2) {
+    adFormPrice.min = 5000;
+    adFormPrice.placeholder = '5000';
+  } else
+  if (adFormType.options.selectedIndex === 3) {
+    adFormPrice.min = 10000;
+    adFormPrice.placeholder = '10000';
+  }
+});
