@@ -37,6 +37,8 @@ var adFormRoomNumber = adForm.querySelector('#room_number');
 var adFormCapacity = adForm.querySelector('#capacity');
 var adFormType = adForm.querySelector('#type');
 var adFormPrice = adForm.querySelector('#price');
+var adFormTimeIn = adForm.querySelector('#timein');
+var adFormTimeOut = adForm.querySelector('#timeout');
 
 var cardTemplate = document.querySelector('#card').content.querySelector('.map__card');
 var currentCard = cardTemplate;
