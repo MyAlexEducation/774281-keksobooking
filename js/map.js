@@ -258,3 +258,34 @@ adFormType.addEventListener('change', function () {
     adFormPrice.placeholder = '10000';
   }
 });
+
+adFormTimeIn.options[0].selected = true;
+adFormTimeOut.options[0].selected = true;
+adFormTimeIn.addEventListener('change', function () {
+  if (adFormTimeIn.options.selectedIndex === 0) {
+    adFormTimeOut.options[0].selected = true;
+  }
+  if (adFormTimeIn.options.selectedIndex === 1) {
+    adFormTimeOut.options[1].selected = true;
+  }
+  if (adFormTimeIn.options.selectedIndex === 2) {
+    adFormTimeOut.options[2].selected = true;
+  }
+  if (adFormTimeIn.options.selectedIndex === 3) {
+    adFormTimeOut.options[3].selected = true;
+  }
+});
+adFormTimeOut.addEventListener('change', function () {
+  if (adFormTimeOut.options.selectedIndex === 0) {
+    adFormTimeIn.options[0].selected = true;
+  }
+  if (adFormTimeOut.options.selectedIndex === 1) {
+    adFormTimeIn.options[1].selected = true;
+  }
+  if (adFormTimeOut.options.selectedIndex === 2) {
+    adFormTimeIn.options[2].selected = true;
+  }
+  if (adFormTimeOut.options.selectedIndex === 3) {
+    adFormTimeIn.options[3].selected = true;
+  }
+});
