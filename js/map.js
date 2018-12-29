@@ -163,6 +163,23 @@ var showCards = function () {
 var showAdForm = function () {
   adForm.classList.remove('ad-form--disabled');
 };
+var adFormCapacityInit = function () {
+  adFormCapacity.options[0].disabled = true;
+  adFormCapacity.options[1].disabled = true;
+  adFormCapacity.options[2].selected = true;
+  adFormCapacity.options[3].disabled = true;
+};
+var adFormPriceInit = function () {
+  adFormPrice.min = 1000;
+  adFormPrice.placeholder = '1000';
+};
+var adFormTypeInit = function () {
+  adFormType.options[1].selected = true;
+};
+var adFormTimeInit = function () {
+  adFormTimeIn.options[0].selected = true;
+  adFormTimeOut.options[0].selected = true;
+};
 
 fillArray(buildings, Building, NUMBER_ADS);
 createPins(buildings);
@@ -191,10 +208,10 @@ map.addEventListener('click', function (evt) {
   }
 });
 
-adFormCapacity.options[0].disabled = true;
-adFormCapacity.options[1].disabled = true;
-adFormCapacity.options[2].selected = true;
-adFormCapacity.options[3].disabled = true;
+adFormCapacityInit();
+adFormPriceInit();
+adFormTypeInit();
+adFormTimeInit();
 adFormRoomNumber.addEventListener('change', function () {
   if (adFormRoomNumber.options.selectedIndex === 0) {
     adFormCapacity.options[0].disabled = true;
@@ -237,9 +254,6 @@ adFormCapacity.addEventListener('change', function () {
   }
 });
 
-adFormType.options[1].selected = true;
-adFormPrice.min = 1000;
-adFormPrice.placeholder = '1000';
 adFormType.addEventListener('change', function () {
   if (adFormType.options.selectedIndex === 0) {
     adFormPrice.min = 0;
@@ -259,8 +273,6 @@ adFormType.addEventListener('change', function () {
   }
 });
 
-adFormTimeIn.options[0].selected = true;
-adFormTimeOut.options[0].selected = true;
 adFormTimeIn.addEventListener('change', function () {
   if (adFormTimeIn.options.selectedIndex === 0) {
     adFormTimeOut.options[0].selected = true;
