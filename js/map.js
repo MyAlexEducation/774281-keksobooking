@@ -223,7 +223,7 @@ adFormRoomNumber.addEventListener('change', function () {
 
   var indexSelected = adFormCapacity.options.selectedIndex;
   var selectCapacityOption = adFormCapacity.options[indexSelected];
-  if ((selectCapacityOption.disabled === true)) {
+  if ((selectCapacityOption.disabled)) {
     adFormCapacity.setCustomValidity('Неверное количество мест');
   } else {
     adFormCapacity.target.setCustomValidity('');
@@ -232,7 +232,7 @@ adFormRoomNumber.addEventListener('change', function () {
 adFormCapacity.addEventListener('change', function () {
   var indexSelected = adFormCapacity.options.selectedIndex;
   var selectCapacityOption = adFormCapacity.options[indexSelected];
-  if ((selectCapacityOption.disabled === false)) {
+  if (!(selectCapacityOption.disabled)) {
     adFormCapacity.setCustomValidity('');
   }
 });
