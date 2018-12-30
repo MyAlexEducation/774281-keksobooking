@@ -195,11 +195,7 @@ mainPin.addEventListener('mousedown', function (evt) {
     y: evt.clientY
   };
   var isCorrectCoords = function (x, y) {
-    if ((x >= MIN_LOCATION_X && x <= MAX_LOCATION_X) && (y >= MIN_LOCATION_Y && y <= MAX_LOCATION_Y)) {
-      return true;
-    } else {
-      return false;
-    }
+    return (x >= MIN_LOCATION_X && x <= MAX_LOCATION_X) && (y >= MIN_LOCATION_Y && y <= MAX_LOCATION_Y);
   };
 
   var onMouseMove = function (moveEvt) {
