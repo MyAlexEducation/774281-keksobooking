@@ -12,10 +12,6 @@ var MIN_ROOMS = 1;
 var MAX_ROOMS = 5;
 var MIN_GUESTS = 0;
 var MAX_GUESTS = 100;
-var MIN_LOCATION_X = 130;
-var MAX_LOCATION_X = 630;
-var MIN_LOCATION_Y = 130;
-var MAX_LOCATION_Y = 630;
 
 var fragment = document.createDocumentFragment();
 
@@ -28,6 +24,10 @@ var mainPin = document.querySelector('.map__pin--main');
 
 var WIDTH_MAP = map.offsetWidth;
 var HEIGHT_MAP = map.offsetHeight;
+var MIN_LOCATION_X = 0;
+var MAX_LOCATION_X = WIDTH_MAP;
+var MIN_LOCATION_Y = 130;
+var MAX_LOCATION_Y = 630;
 var WIDTH_PIN = 50; // как в случае тега template узнать размеры дочерних элементов? установка display не помогает.
 var HEIGHT_PIN = 70;
 
@@ -194,6 +194,13 @@ mainPin.addEventListener('mousedown', function (evt) {
     x: evt.clientX,
     y: evt.clientY
   };
+  var isCorrectCoords = function (x, y) {
+    if ((x >= MIN_LOCATION_X && x <= MAX_LOCATION_X) && (y >= MIN_LOCATION_Y && y <= MAX_LOCATION_Y)) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   var onMouseMove = function (moveEvt) {
     moveEvt.preventDefault();
@@ -208,19 +215,22 @@ mainPin.addEventListener('mousedown', function (evt) {
       y: moveEvt.clientY
     };
 
-    mainPin.style.top = (mainPin.offsetTop - shift.y) + 'px';
-    mainPin.style.left = (mainPin.offsetLeft - shift.x) + 'px';
-    adFormAddress.value = (mainPin.offsetTop - shift.y) + ',' + (mainPin.offsetLeft - shift.x);
+    if (isCorrectCoords((mainPin.offsetLeft - shift.x), (mainPin.offsetTop - shift.y))) {
+      mainPin.style.top = (mainPin.offsetTop - shift.y) + 'px';
+      mainPin.style.left = (mainPin.offsetLeft - shift.x) + 'px';
+      adFormAddress.value = (mainPin.offsetTop - shift.y) + ',' + (mainPin.offsetLeft - shift.x);
+    }
   };
 
   var onMouseUp = function (upEvt) {
     upEvt.preventDefault();
 
-    document.removeEventListener('mousemove', onMouseMove);
+    map.removeEventListener('mousemove', onMouseMove);
     document.removeEventListener('mouseup', onMouseUp);
+    adFormAddress.value = mainPin.style.top.slice(0, -2) + ',' + mainPin.style.left.slice(0, -2);
   };
 
-  document.addEventListener('mousemove', onMouseMove);
+  map.addEventListener('mousemove', onMouseMove);
   document.addEventListener('mouseup', onMouseUp);
 
   showMap();
