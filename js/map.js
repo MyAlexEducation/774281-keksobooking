@@ -218,7 +218,7 @@ mainPin.addEventListener('mousedown', function (evt) {
     if (isCorrectCoords((mainPin.offsetLeft - shift.x), (mainPin.offsetTop - shift.y))) {
       mainPin.style.top = (mainPin.offsetTop - shift.y) + 'px';
       mainPin.style.left = (mainPin.offsetLeft - shift.x) + 'px';
-      adFormAddress.value = (mainPin.offsetTop - shift.y) + ',' + (mainPin.offsetLeft - shift.x);
+      adFormAddress.value = (mainPin.offsetTop - shift.y + HEIGHT_PIN) + ',' + (mainPin.offsetLeft - shift.x + WIDTH_PIN / 2);
     }
   };
 
@@ -227,7 +227,7 @@ mainPin.addEventListener('mousedown', function (evt) {
 
     map.removeEventListener('mousemove', onMouseMove);
     document.removeEventListener('mouseup', onMouseUp);
-    adFormAddress.value = mainPin.style.top.slice(0, -2) + ',' + mainPin.style.left.slice(0, -2);
+    adFormAddress.value = (parseInt(mainPin.style.top, 10) + HEIGHT_PIN) + ',' + (parseInt(mainPin.style.left, 10) + WIDTH_PIN / 2);
   };
 
   map.addEventListener('mousemove', onMouseMove);
