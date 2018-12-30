@@ -210,7 +210,7 @@ mainPin.addEventListener('mousedown', function (evt) {
 
     mainPin.style.top = (mainPin.offsetTop - shift.y) + 'px';
     mainPin.style.left = (mainPin.offsetLeft - shift.x) + 'px';
-
+    adFormAddress.value = (mainPin.offsetTop - shift.y) + ',' + (mainPin.offsetLeft - shift.x);
   };
 
   var onMouseUp = function (upEvt) {
@@ -218,19 +218,11 @@ mainPin.addEventListener('mousedown', function (evt) {
 
     document.removeEventListener('mousemove', onMouseMove);
     document.removeEventListener('mouseup', onMouseUp);
-
-    if (dragged) {
-      var onClickPreventDefault = function (evt) {
-        evt.preventDefault();
-        dialogHandler.removeEventListener('click', onClickPreventDefault)
-      };
-      dialogHandler.addEventListener('click', onClickPreventDefault);
-    }
-
   };
 
   document.addEventListener('mousemove', onMouseMove);
   document.addEventListener('mouseup', onMouseUp);
+
   showMap();
   showAdForm();
   showPins();
