@@ -1,26 +1,19 @@
 'use strict';
 
-var SVG_AFTER_MAIN_PIN_HEIGHT = 15;
+
 
 var fragment = document.createDocumentFragment();
 
-var map = document.querySelector('.map');
+
 var pinsContainer = document.querySelector('.map__pins');
 var mapPinTemplateContainer = document.querySelector('#pin');
 var mapPinTemplate = mapPinTemplateContainer.content.querySelector('.map__pin');
 var mapFiltersContainer = document.querySelector('.map__filters-container');
-var mainPin = document.querySelector('.map__pin--main');
 
-var WIDTH_MAP = map.offsetWidth;
-var HEIGHT_MAP = map.offsetHeight;
-var WIDTH_PIN = 50; // как в случае тега template узнать размеры дочерних элементов? установка display не помогает.
-var HEIGHT_PIN = 70;
-var WIDTH_MAIN_PIN = mainPin.offsetWidth;
-var HEIGHT_MAIN_PIN = mainPin.offsetHeight + SVG_AFTER_MAIN_PIN_HEIGHT;
-var MIN_LOCATION_X = Math.round(-mainPin.offsetWidth / 2);
-var MAX_LOCATION_X = WIDTH_MAP - mainPin.offsetWidth / 2;
-var MIN_LOCATION_Y = 130 - HEIGHT_MAIN_PIN;
-var MAX_LOCATION_Y = 630 - HEIGHT_MAIN_PIN;
+
+
+
+
 
 var adForm = document.querySelector('.ad-form');
 var adFormAddress = adForm.querySelector('#address');
