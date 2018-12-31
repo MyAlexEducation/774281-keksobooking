@@ -1,6 +1,8 @@
 'use strict';
 
 (function () {
+  var fragment = document.createDocumentFragment();
+
   var buildings = [];
   var types = ['palace', 'flat', 'house', 'bungalo'];
 
@@ -20,6 +22,8 @@
   var MAX_LOCATION_Y = 630 - HEIGHT_MAIN_PIN;
 
   window.data = {
+    fragment: fragment,
+
     buildings: buildings,
     types: types,
 

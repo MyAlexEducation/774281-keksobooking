@@ -57,8 +57,4 @@
   };
 
   window.utils.fillArray(window.data.buildings, Building, NUMBER_ADS);
-
-  window.mock = {
-
-  };
 })();

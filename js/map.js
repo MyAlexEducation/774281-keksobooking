@@ -1,10 +1,5 @@
 'use strict';
 
-var fragment = document.createDocumentFragment();
-
-var pinsContainer = document.querySelector('.map__pins');
-var mapPinTemplateContainer = document.querySelector('#pin');
-var mapPinTemplate = mapPinTemplateContainer.content.querySelector('.map__pin');
 var mapFiltersContainer = document.querySelector('.map__filters-container');
 
 var adForm = document.querySelector('.ad-form');
@@ -20,15 +15,6 @@ var cardTemplate = document.querySelector('#card').content.querySelector('.map__
 var currentCard = cardTemplate;
 var cardClose = cardTemplate.querySelector('.popup__close');
 
-var addLocationPin = function (pin, building) {
-  pin.style.left = (building.location.x - Math.round(window.data.WIDTH_PIN / 2)).toString() + 'px';
-  pin.style.top = (building.location.y - window.data.HEIGHT_PIN).toString() + 'px';
-};
-var addInfoPin = function (pin, building) {
-  var imgPin = pin.querySelector('img');
-  imgPin.src = building.author.avatar;
-  imgPin.alt = building.offer.title;
-};
 var addInfoCard = function (card, building) {
   var textTypes = ['Дворец', 'Квартира', 'Дом', 'Бунгало'];
   var indexType = 0;
@@ -51,34 +37,24 @@ var addInfoCard = function (card, building) {
   for (i = 0; i < building.offer.photos.length; i++) {
     var img = popupPhoto.cloneNode(true);
     img.src = building.offer.photos[i];
-    fragment.appendChild(img);
+    window.data.fragment.appendChild(img);
   }
   card.querySelector('.popup__photos').removeChild(popupPhoto);
-  card.querySelector('.popup__photos').appendChild(fragment);
+  card.querySelector('.popup__photos').appendChild(window.data.fragment);
   card.querySelector('.popup__avatar').src = building.author.avatar;
 };
-var createPins = function (buildingsList) {
-  for (var i = 0; i < buildingsList.length; i++) {
-    var pinElement = mapPinTemplate.cloneNode(true);
-    addLocationPin(pinElement, buildingsList[i]);
-    addInfoPin(pinElement, buildingsList[i]);
-    pinElement.dataset.PinIndex = i.toString();
-    fragment.appendChild(pinElement);
-  }
-};
+
 var createCards = function (buildingsList, index) {
   var cardElement = cardTemplate.cloneNode(true);
   addInfoCard(cardElement, buildingsList[index]);
-  fragment.appendChild(cardElement);
+  window.data.fragment.appendChild(cardElement);
 };
 var showMap = function () {
   window.data.map.classList.remove('map--faded');
 };
-var showPins = function () {
-  pinsContainer.appendChild(fragment);
-};
+
 var showCards = function () {
-  window.data.map.insertBefore(fragment, mapFiltersContainer);
+  window.data.map.insertBefore(window.data.fragment, mapFiltersContainer);
 };
 var showAdForm = function () {
   adForm.classList.remove('ad-form--disabled');
@@ -103,9 +79,6 @@ var adFormTimeInit = function () {
 var adFormAddressInit = function () {
   adFormAddress.value = window.data.WIDTH_MAP / 2 + ',' + window.data.HEIGHT_MAP / 2;
 };
-
-
-createPins(window.data.buildings);
 
 window.data.mainPin.addEventListener('mousedown', function (evt) {
   evt.preventDefault();
@@ -156,7 +129,7 @@ window.data.mainPin.addEventListener('mousedown', function (evt) {
 
   showMap();
   showAdForm();
-  showPins();
+  window.pins.showPins();
 });
 
 window.data.map.addEventListener('click', function (evt) {
