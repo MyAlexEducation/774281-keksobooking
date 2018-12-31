@@ -57,35 +57,23 @@ var photos = ['http://o0.github.io/assets/images/tokyo/hotel1.jpg',
 
 var buildings = [];
 
-var getRandomInt = function (min, max) {
-  return Math.floor(Math.random() * (max - min)) + min;
-};
-var getRandomData = function (arrayData) {
-  return arrayData[getRandomInt(0, arrayData.length)];
-};
-var fillArray = function (array, Fill, length) {
-  for (var i = 0; i < length; i++) {
-    array[i] = new Fill(i);
-  }
-};
-
-var pinX = getRandomInt(MIN_LOCATION_X, MAX_LOCATION_X);
-var pinY = getRandomInt(MIN_LOCATION_Y, MAX_LOCATION_Y);
+var pinX = window.utils.getRandomInt(MIN_LOCATION_X, MAX_LOCATION_X);
+var pinY = window.utils.getRandomInt(MIN_LOCATION_Y, MAX_LOCATION_Y);
 var Author = function (i) {
   this.avatar = PATH_AVATAR_IMGS + avatarImgs[i].toString();
 };
 var Offer = function (i) {
   this.title = titles[i];
   this.address = (pinX + Math.round(-mainPin.offsetWidth / 2)).toString() + ', ' + (pinY + HEIGHT_MAIN_PIN).toString();
-  this.price = getRandomInt(MIN_PRICE, MAX_PRICE);
-  this.type = getRandomData(types);
-  this.rooms = getRandomInt(MIN_ROOMS, MAX_ROOMS);
-  this.guests = getRandomInt(MIN_GUESTS, MAX_GUESTS);
-  this.checkin = getRandomData(checkin);
-  this.checkout = getRandomData(checkout);
+  this.price = window.utils.getRandomInt(MIN_PRICE, MAX_PRICE);
+  this.type = window.utils.getRandomData(types);
+  this.rooms = window.utils.getRandomInt(MIN_ROOMS, MAX_ROOMS);
+  this.guests = window.utils.getRandomInt(MIN_GUESTS, MAX_GUESTS);
+  this.checkin = window.utils.getRandomData(checkin);
+  this.checkout = window.utils.getRandomData(checkout);
   this.features = [];
   for (var j = 0; j < features.length; j++) {
-    if (getRandomInt(0, 1)) {
+    if (window.utils.getRandomInt(0, 1)) {
       this.features.push(features[j]);
     }
   }
@@ -97,8 +85,8 @@ var Location = function () {
   this.y = pinY + HEIGHT_MAIN_PIN;
 };
 var Building = function (i) {
-  pinX = getRandomInt(MIN_LOCATION_X, MAX_LOCATION_X);
-  pinY = getRandomInt(MIN_LOCATION_Y, MAX_LOCATION_Y);
+  pinX = window.utils.getRandomInt(MIN_LOCATION_X, MAX_LOCATION_X);
+  pinY = window.utils.getRandomInt(MIN_LOCATION_Y, MAX_LOCATION_Y);
   this.author = new Author(i);
   this.offer = new Offer(i);
   this.location = new Location();
@@ -187,7 +175,7 @@ var adFormAddressInit = function () {
   adFormAddress.value = WIDTH_MAP / 2 + ',' + HEIGHT_MAP / 2;
 };
 
-fillArray(buildings, Building, NUMBER_ADS);
+window.utils.fillArray(buildings, Building, NUMBER_ADS);
 createPins(buildings);
 
 mainPin.addEventListener('mousedown', function (evt) {
