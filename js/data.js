@@ -1,6 +1,9 @@
 'use strict';
 
 (function () {
+  var buildings = [];
+  var types = ['palace', 'flat', 'house', 'bungalo'];
+
   var map = document.querySelector('.map');
   var mainPin = document.querySelector('.map__pin--main');
 
@@ -17,8 +20,12 @@
   var MAX_LOCATION_Y = 630 - HEIGHT_MAIN_PIN;
 
   window.data = {
+    buildings: buildings,
+    types: types,
+
     map: map,
     mainPin: mainPin,
+
     WIDTH_PIN: WIDTH_PIN,
     HEIGHT_PIN: HEIGHT_PIN,
     SVG_AFTER_MAIN_PIN_HEIGHT: SVG_AFTER_MAIN_PIN_HEIGHT,
