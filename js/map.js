@@ -2,20 +2,13 @@
 
 var NUMBER_ADS = 8;
 var PATH_AVATAR_IMGS = 'img/avatars/';
-var MIN_ADDRESS_X = 0;
-var MAX_ADDRESS_X = 1000;
-var MIN_ADDRESS_Y = 0;
-var MAX_ADDRESS_Y = 1000;
 var MIN_PRICE = 1000;
 var MAX_PRICE = 1000000;
 var MIN_ROOMS = 1;
 var MAX_ROOMS = 5;
 var MIN_GUESTS = 0;
 var MAX_GUESTS = 100;
-var MIN_LOCATION_X = 130;
-var MAX_LOCATION_X = 630;
-var MIN_LOCATION_Y = 130;
-var MAX_LOCATION_Y = 630;
+var SVG_AFTER_MAIN_PIN_HEIGHT = 15;
 
 var fragment = document.createDocumentFragment();
 
@@ -30,6 +23,12 @@ var WIDTH_MAP = map.offsetWidth;
 var HEIGHT_MAP = map.offsetHeight;
 var WIDTH_PIN = 50; // как в случае тега template узнать размеры дочерних элементов? установка display не помогает.
 var HEIGHT_PIN = 70;
+var WIDTH_MAIN_PIN = mainPin.offsetWidth;
+var HEIGHT_MAIN_PIN = mainPin.offsetHeight + SVG_AFTER_MAIN_PIN_HEIGHT;
+var MIN_LOCATION_X = Math.round(-mainPin.offsetWidth / 2);
+var MAX_LOCATION_X = WIDTH_MAP - mainPin.offsetWidth / 2;
+var MIN_LOCATION_Y = 130 - HEIGHT_MAIN_PIN;
+var MAX_LOCATION_Y = 630 - HEIGHT_MAIN_PIN;
 
 var adForm = document.querySelector('.ad-form');
 var adFormAddress = adForm.querySelector('#address');
@@ -70,12 +69,14 @@ var fillArray = function (array, Fill, length) {
   }
 };
 
+var pinX = getRandomInt(MIN_LOCATION_X, MAX_LOCATION_X);
+var pinY = getRandomInt(MIN_LOCATION_Y, MAX_LOCATION_Y);
 var Author = function (i) {
   this.avatar = PATH_AVATAR_IMGS + avatarImgs[i].toString();
 };
 var Offer = function (i) {
   this.title = titles[i];
-  this.address = getRandomInt(MIN_ADDRESS_X, MAX_ADDRESS_X).toString() + ', ' + getRandomInt(MIN_ADDRESS_Y, MAX_ADDRESS_Y).toString();
+  this.address = (pinX + Math.round(-mainPin.offsetWidth / 2)).toString() + ', ' + (pinY + HEIGHT_MAIN_PIN).toString();
   this.price = getRandomInt(MIN_PRICE, MAX_PRICE);
   this.type = getRandomData(types);
   this.rooms = getRandomInt(MIN_ROOMS, MAX_ROOMS);
@@ -92,16 +93,18 @@ var Offer = function (i) {
   this.photos = photos;
 };
 var Location = function () {
-  this.x = getRandomInt(MIN_LOCATION_X, MAX_LOCATION_X);
-  this.y = getRandomInt(MIN_LOCATION_Y, MAX_LOCATION_Y);
+  this.x = pinX + Math.round(-mainPin.offsetWidth / 2);
+  this.y = pinY + HEIGHT_MAIN_PIN;
 };
 var Building = function (i) {
+  pinX = getRandomInt(MIN_LOCATION_X, MAX_LOCATION_X);
+  pinY = getRandomInt(MIN_LOCATION_Y, MAX_LOCATION_Y);
   this.author = new Author(i);
   this.offer = new Offer(i);
   this.location = new Location();
 };
 var addLocationPin = function (pin, building) {
-  pin.style.left = (building.location.x - WIDTH_PIN / 2).toString() + 'px';
+  pin.style.left = (building.location.x - Math.round(WIDTH_PIN / 2)).toString() + 'px';
   pin.style.top = (building.location.y - HEIGHT_PIN).toString() + 'px';
 };
 var addInfoPin = function (pin, building) {
@@ -180,16 +183,60 @@ var adFormTimeInit = function () {
   adFormTimeIn.options[0].selected = true;
   adFormTimeOut.options[0].selected = true;
 };
+var adFormAddressInit = function () {
+  adFormAddress.value = WIDTH_MAP / 2 + ',' + HEIGHT_MAP / 2;
+};
 
 fillArray(buildings, Building, NUMBER_ADS);
 createPins(buildings);
 
-adFormAddress.value = WIDTH_MAP / 2 + ',' + HEIGHT_MAP / 2;
-mainPin.addEventListener('mouseup', function () {
+mainPin.addEventListener('mousedown', function (evt) {
+  evt.preventDefault();
+
+  var startCoords = {
+    x: evt.clientX,
+    y: evt.clientY
+  };
+  var isCorrectCoords = function (x, y) {
+    return (x >= MIN_LOCATION_X && x <= MAX_LOCATION_X) && (y >= MIN_LOCATION_Y && y <= MAX_LOCATION_Y);
+  };
+
+  var onMouseMove = function (moveEvt) {
+    moveEvt.preventDefault();
+
+    var shift = {
+      x: startCoords.x - moveEvt.clientX,
+      y: startCoords.y - moveEvt.clientY
+    };
+
+    startCoords = {
+      x: moveEvt.clientX,
+      y: moveEvt.clientY
+    };
+
+    if (isCorrectCoords((mainPin.offsetLeft - shift.x), (mainPin.offsetTop - shift.y))) {
+      mainPin.style.top = (mainPin.offsetTop - shift.y) + 'px';
+      mainPin.style.left = (mainPin.offsetLeft - shift.x) + 'px';
+      adFormAddress.value = (mainPin.offsetLeft - shift.x + Math.round(WIDTH_MAIN_PIN / 2)) + ',' + (mainPin.offsetTop - shift.y + HEIGHT_MAIN_PIN);
+    }
+  };
+
+  var onMouseUp = function (upEvt) {
+    upEvt.preventDefault();
+
+    map.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+    adFormAddress.value = (parseInt(mainPin.style.left, 10) + Math.round(WIDTH_MAIN_PIN / 2)) + ',' + (parseInt(mainPin.style.top, 10) + HEIGHT_MAIN_PIN);
+  };
+
+  map.addEventListener('mousemove', onMouseMove);
+  document.addEventListener('mouseup', onMouseUp);
+
   showMap();
   showAdForm();
   showPins();
 });
+
 map.addEventListener('click', function (evt) {
   var target = evt.target;
   while (target !== map) {
@@ -208,6 +255,7 @@ map.addEventListener('click', function (evt) {
   }
 });
 
+adFormAddressInit();
 adFormCapacityInit();
 adFormPriceInit();
 adFormTypeInit();
