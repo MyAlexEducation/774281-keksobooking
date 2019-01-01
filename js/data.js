@@ -8,6 +8,7 @@
 
   var map = document.querySelector('.map');
   var mainPin = document.querySelector('.map__pin--main');
+  var mapFiltersContainer = document.querySelector('.map__filters-container');
 
   var WIDTH_PIN = 50; // как в случае тега template узнать размеры дочерних элементов? установка display не помогает.
   var HEIGHT_PIN = 70;
@@ -29,6 +30,7 @@
 
     map: map,
     mainPin: mainPin,
+    mapFiltersContainer: mapFiltersContainer,
 
     WIDTH_PIN: WIDTH_PIN,
     HEIGHT_PIN: HEIGHT_PIN,
