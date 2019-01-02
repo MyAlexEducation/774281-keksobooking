@@ -13,6 +13,10 @@
   var showAdForm = function () {
     adForm.classList.remove('ad-form--disabled');
   };
+  var hideAdForm = function () {
+    adForm.classList.add('ad-form--disabled');
+  }
+
   var adFormCapacityInit = function () {
     adFormCapacity.options[0].disabled = true;
     adFormCapacity.options[1].disabled = true;
@@ -45,8 +49,10 @@
     adFormTypeInit();
     adFormTimeInit();
     adFormTitleInit();
+    hideAdForm();
 
     window.pins.deletePins();
+    window.map.hideMap();
   };
 
   var errorUpLoadAddForm = function () {

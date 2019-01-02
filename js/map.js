@@ -4,6 +4,9 @@
   var showMap = function () {
     window.data.map.classList.remove('map--faded');
   };
+  var hideMap = function () {
+    window.data.map.classList.add('map--faded');
+  };
 
   window.data.mainPin.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
@@ -74,4 +77,8 @@
       target = target.parentNode;
     }
   });
+
+  window.map = {
+    hideMap: hideMap
+  };
 })();
