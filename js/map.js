@@ -6,6 +6,8 @@
   };
   var hideMap = function () {
     window.data.map.classList.add('map--faded');
+    window.data.mainPin.style.left = '570px';
+    window.data.mainPin.style.top = '375px';
   };
 
   window.data.mainPin.addEventListener('mousedown', function (evt) {

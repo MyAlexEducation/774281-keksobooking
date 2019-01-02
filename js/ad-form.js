@@ -10,6 +10,9 @@
   var adFormTimeOut = adForm.querySelector('#timeout');
   var adFormTitle = adForm.querySelector('#title');
 
+  var popapSuccessAdForm = document.querySelector('#success').querySelector('.success');
+  var popapErrorAdForm = document.querySelector('#error').querySelector('.error');
+
   var showAdForm = function () {
     adForm.classList.remove('ad-form--disabled');
   };
