@@ -10,8 +10,8 @@
   var adFormTimeOut = adForm.querySelector('#timeout');
   var adFormTitle = adForm.querySelector('#title');
 
-  var popapSuccessAdForm = document.querySelector('#success').querySelector('.success');
-  var popapErrorAdForm = document.querySelector('#error').querySelector('.error');
+  var popapSuccessAdForm = document.querySelector('#success').content.querySelector('.success');
+  var popapErrorAdForm = document.querySelector('#error').content.querySelector('.error');
 
   var showAdForm = function () {
     adForm.classList.remove('ad-form--disabled');
@@ -56,10 +56,12 @@
 
     window.pins.deletePins();
     window.map.hideMap();
+
+    document.querySelector('main').appendChild(popapSuccessAdForm);
   };
 
   var errorUpLoadAddForm = function () {
-    alert('bad');
+    document.querySelector('main').appendChild(popapErrorAdForm);
   };
 
 
