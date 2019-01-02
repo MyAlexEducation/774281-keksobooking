@@ -9,7 +9,11 @@
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
-      onLoad(xhr.response);
+      if (xhr.status === 200) {
+        onLoad(xhr.response);
+      } else {
+        onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
+      }
     });
 
     xhr.open('POST', adFormAction);
@@ -20,12 +24,17 @@
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
-    xhr.open('GET', getBuildingsURL);
-
     xhr.addEventListener('load', function () {
-      onLoad(xhr.response);
+      if (xhr.status === 200) {
+        onLoad(xhr.response);
+      } else {
+        onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
+      }
     });
 
+    xhr.timeout = 10000;
+
+    xhr.open('GET', getBuildingsURL);
     xhr.send();
   };
 
