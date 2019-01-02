@@ -2,6 +2,7 @@
 
 (function () {
   var ESC_KEYCODE = 27;
+  var ENTER_KEYCODE = 13;
 
   var adForm = document.querySelector('.ad-form');
   var adFormRoomNumber = adForm.querySelector('#room_number');
@@ -11,9 +12,11 @@
   var adFormTimeIn = adForm.querySelector('#timein');
   var adFormTimeOut = adForm.querySelector('#timeout');
   var adFormTitle = adForm.querySelector('#title');
+  var adFormResetButon = adForm.querySelector('.ad-form__reset');
 
   var popapSuccessAdForm = document.querySelector('#success').content.querySelector('.success');
   var popapErrorAdForm = document.querySelector('#error').content.querySelector('.error');
+  var popapErorAdFormClose = popapErrorAdForm.querySelector('.error__button');
 
   var showAdForm = function () {
     adForm.classList.remove('ad-form--disabled');
@@ -47,7 +50,7 @@
     adFormTitle.value = '';
   };
 
-  var successUpLoadAdForm = function () {
+  var adFormReset = function () {
     adFormAddressInit();
     adFormCapacityInit();
     adFormPriceInit();
@@ -58,6 +61,10 @@
 
     window.pins.deletePins();
     window.map.hideMap();
+  };
+
+  var successUpLoadAdForm = function () {
+    adFormReset();
 
     document.querySelector('main').appendChild(popapSuccessAdForm);
     document.addEventListener('click', function () {
@@ -77,6 +84,14 @@
     });
     document.addEventListener('keydown', function (evt) {
       if (evt.keyCode === ESC_KEYCODE) {
+        popapErrorAdForm.parentNode.removeChild(popapErrorAdForm);
+      }
+    });
+    popapErorAdFormClose.addEventListener('click', function () {
+      popapErrorAdForm.parentNode.removeChild(popapErrorAdForm);
+    });
+    popapErorAdFormClose.addEventListener('keydown', function (evt) {
+      if (evt.keyCode === ENTER_KEYCODE) {
         popapErrorAdForm.parentNode.removeChild(popapErrorAdForm);
       }
     });
@@ -181,6 +196,15 @@
   adForm.addEventListener('submit', function (evt) {
     window.backend.adFormUpload(new FormData(adForm), successUpLoadAdForm, errorUpLoadAddForm);
     evt.preventDefault();
+  });
+
+  adFormResetButon.addEventListener('click', function () {
+    adFormReset();
+  });
+  adFormResetButon.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === ENTER_KEYCODE) {
+      adFormReset();
+    };
   });
 
   window.adForm = {
