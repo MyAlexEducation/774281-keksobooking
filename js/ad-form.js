@@ -45,6 +45,8 @@
     adFormTypeInit();
     adFormTimeInit();
     adFormTitleInit();
+
+    window.pins.deletePins();
   };
 
   var errorUpLoadAddForm = function () {

@@ -26,6 +26,15 @@
     }
   };
 
+  var deletePins = function () {
+    var pins = document.querySelectorAll('.map__pin');
+    for (var i = 0; i < pins.length; i++) {
+      if (!pins[i].classList.contains('map__pin--main')) {
+        pins[i].parentNode.removeChild(pins[i]);
+      }
+    }
+  };
+
   var showPins = function () {
     pinsContainer.appendChild(window.data.fragment);
   };
@@ -33,6 +42,7 @@
   createPins(window.data.buildings);
 
   window.pins = {
-    showPins: showPins
+    showPins: showPins,
+    deletePins: deletePins
   };
 })();
