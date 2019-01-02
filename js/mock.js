@@ -57,4 +57,8 @@
   };
 
   window.utils.fillArray(window.data.buildings, Building, NUMBER_ADS);
+
+  window.backend.buildingsLoad(function (loadBuildings) {
+    window.data.buildings = loadBuildings;
+  });
 })();
