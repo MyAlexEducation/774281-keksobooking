@@ -129,6 +129,13 @@
     }
   });
 
+  adForm.addEventListener('submit', function (evt) {
+    window.backend.adFormUpload(new FormData(adForm), function () {
+      console.log('ok');
+    });
+    evt.preventDefault();
+  });
+
   window.adForm = {
     showAdForm: showAdForm
   };

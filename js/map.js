@@ -44,7 +44,7 @@
 
       window.data.map.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
-      window.dataadFormAddress.value = (parseInt(window.data.mainPin.style.left, 10)
+      window.data.adFormAddress.value = (parseInt(window.data.mainPin.style.left, 10)
         + Math.round(window.data.WIDTH_MAIN_PIN / 2)) + ','
         + (parseInt(window.data.mainPin.style.top, 10) + window.data.HEIGHT_MAIN_PIN);
     };
