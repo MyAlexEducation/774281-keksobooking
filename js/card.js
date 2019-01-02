@@ -20,7 +20,7 @@
     card.querySelector('.popup__text--time').textContent = 'Заезд после ' + building.offer.checkin + ', выезд до ' + building.offer.checkout;
     card.querySelector('.popup__features').textContent = '';
     for (var i = 0; i < building.offer.features.length; i++) {
-      card.querySelector('.popup__features').textContent += building.offer.features[i];
+      card.querySelector('.popup__features').textContent += building.offer.features[i] + ' ';
     }
     card.querySelector('.popup__description').textContent = building.offer.description;
     var popupPhoto = card.querySelector('.popup__photo');

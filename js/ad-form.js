@@ -204,7 +204,7 @@
   adFormResetButon.addEventListener('keydown', function (evt) {
     if (evt.keyCode === ENTER_KEYCODE) {
       adFormReset();
-    };
+    }
   });
 
   window.adForm = {
