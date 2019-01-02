@@ -18,7 +18,7 @@
   };
   var hideAdForm = function () {
     adForm.classList.add('ad-form--disabled');
-  }
+  };
 
   var adFormCapacityInit = function () {
     adFormCapacity.options[0].disabled = true;
@@ -58,10 +58,16 @@
     window.map.hideMap();
 
     document.querySelector('main').appendChild(popapSuccessAdForm);
+    document.addEventListener('click', function () {
+      popapSuccessAdForm.parentNode.removeChild(popapSuccessAdForm);
+    });
   };
 
   var errorUpLoadAddForm = function () {
     document.querySelector('main').appendChild(popapErrorAdForm);
+    document.addEventListener('click', function () {
+      popapErrorAdForm.parentNode.removeChild(popapErrorAdForm);
+    });
   };
 
 
