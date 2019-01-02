@@ -8,6 +8,7 @@
   var adFormPrice = adForm.querySelector('#price');
   var adFormTimeIn = adForm.querySelector('#timein');
   var adFormTimeOut = adForm.querySelector('#timeout');
+  var adFormTitle = adForm.querySelector('#title');
 
   var showAdForm = function () {
     adForm.classList.remove('ad-form--disabled');
@@ -21,6 +22,7 @@
   var adFormPriceInit = function () {
     adFormPrice.min = 1000;
     adFormPrice.placeholder = '1000';
+    adFormPrice.value = '';
   };
   var adFormTypeInit = function () {
     adFormType.options[1].selected = true;
@@ -31,6 +33,22 @@
   };
   var adFormAddressInit = function () {
     window.data.adFormAddress.value = window.data.WIDTH_MAP / 2 + ',' + window.data.HEIGHT_MAP / 2;
+  };
+  var adFormTitleInit = function () {
+    adFormTitle.value = '';
+  };
+
+  var successUpLoadAdForm = function () {
+    adFormAddressInit();
+    adFormCapacityInit();
+    adFormPriceInit();
+    adFormTypeInit();
+    adFormTimeInit();
+    adFormTitleInit();
+  };
+
+  var errorUpLoadAddForm = function () {
+    alert('bad');
   };
 
 
@@ -70,7 +88,7 @@
     if ((selectCapacityOption.disabled)) {
       adFormCapacity.setCustomValidity('Неверное количество мест');
     } else {
-      adFormCapacity.target.setCustomValidity('');
+      adFormCapacity.setCustomValidity('');
     }
   });
   adFormCapacity.addEventListener('change', function () {
@@ -130,9 +148,7 @@
   });
 
   adForm.addEventListener('submit', function (evt) {
-    window.backend.adFormUpload(new FormData(adForm), function () {
-      console.log('ok');
-    });
+    window.backend.adFormUpload(new FormData(adForm), successUpLoadAdForm, errorUpLoadAddForm);
     evt.preventDefault();
   });
 
