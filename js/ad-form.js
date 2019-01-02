@@ -1,6 +1,8 @@
 'use strict';
 
 (function () {
+  var ESC_KEYCODE = 27;
+
   var adForm = document.querySelector('.ad-form');
   var adFormRoomNumber = adForm.querySelector('#room_number');
   var adFormCapacity = adForm.querySelector('#capacity');
@@ -61,12 +63,22 @@
     document.addEventListener('click', function () {
       popapSuccessAdForm.parentNode.removeChild(popapSuccessAdForm);
     });
+    document.addEventListener('keydown', function (evt) {
+      if (evt.keyCode === ESC_KEYCODE) {
+        popapSuccessAdForm.parentNode.removeChild(popapSuccessAdForm);
+      }
+    });
   };
 
   var errorUpLoadAddForm = function () {
     document.querySelector('main').appendChild(popapErrorAdForm);
     document.addEventListener('click', function () {
       popapErrorAdForm.parentNode.removeChild(popapErrorAdForm);
+    });
+    document.addEventListener('keydown', function (evt) {
+      if (evt.keyCode === ESC_KEYCODE) {
+        popapErrorAdForm.parentNode.removeChild(popapErrorAdForm);
+      }
     });
   };
 
