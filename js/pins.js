@@ -28,11 +28,11 @@
 
   var deletePins = function () {
     var pins = document.querySelectorAll('.map__pin');
-    for (var i = 0; i < pins.length; i++) {
-      if (!pins[i].classList.contains('map__pin--main')) {
-        pins[i].parentNode.removeChild(pins[i]);
+    pins.forEach(function (items) {
+      if (!items.classList.contains('map__pin--main')) {
+        items.parentNode.removeChild(items);
       }
-    }
+    });
   };
 
   var showPins = function () {
