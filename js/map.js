@@ -4,6 +4,11 @@
   var showMap = function () {
     window.data.map.classList.remove('map--faded');
   };
+  var hideMap = function () {
+    window.data.map.classList.add('map--faded');
+    window.data.mainPin.style.left = '570px';
+    window.data.mainPin.style.top = '375px';
+  };
 
   window.data.mainPin.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
@@ -44,7 +49,7 @@
 
       window.data.map.removeEventListener('mousemove', onMouseMove);
       document.removeEventListener('mouseup', onMouseUp);
-      window.dataadFormAddress.value = (parseInt(window.data.mainPin.style.left, 10)
+      window.data.adFormAddress.value = (parseInt(window.data.mainPin.style.left, 10)
         + Math.round(window.data.WIDTH_MAIN_PIN / 2)) + ','
         + (parseInt(window.data.mainPin.style.top, 10) + window.data.HEIGHT_MAIN_PIN);
     };
@@ -74,4 +79,8 @@
       target = target.parentNode;
     }
   });
+
+  window.map = {
+    hideMap: hideMap
+  };
 })();

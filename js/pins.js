@@ -26,13 +26,22 @@
     }
   };
 
+  var deletePins = function () {
+    var pins = document.querySelectorAll('.map__pin');
+    pins.forEach(function (items) {
+      if (!items.classList.contains('map__pin--main')) {
+        items.parentNode.removeChild(items);
+      }
+    });
+  };
+
   var showPins = function () {
+    createPins(window.data.buildings);
     pinsContainer.appendChild(window.data.fragment);
   };
 
-  createPins(window.data.buildings);
-
   window.pins = {
-    showPins: showPins
+    showPins: showPins,
+    deletePins: deletePins
   };
 })();

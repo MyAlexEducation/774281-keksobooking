@@ -1,6 +1,9 @@
 'use strict';
 
 (function () {
+  var ESC_KEYCODE = 27;
+  var ENTER_KEYCODE = 13;
+
   var adForm = document.querySelector('.ad-form');
   var adFormRoomNumber = adForm.querySelector('#room_number');
   var adFormCapacity = adForm.querySelector('#capacity');
@@ -8,10 +11,20 @@
   var adFormPrice = adForm.querySelector('#price');
   var adFormTimeIn = adForm.querySelector('#timein');
   var adFormTimeOut = adForm.querySelector('#timeout');
+  var adFormTitle = adForm.querySelector('#title');
+  var adFormResetButon = adForm.querySelector('.ad-form__reset');
+
+  var popapSuccessAdForm = document.querySelector('#success').content.querySelector('.success');
+  var popapErrorAdForm = document.querySelector('#error').content.querySelector('.error');
+  var popapErorAdFormClose = popapErrorAdForm.querySelector('.error__button');
 
   var showAdForm = function () {
     adForm.classList.remove('ad-form--disabled');
   };
+  var hideAdForm = function () {
+    adForm.classList.add('ad-form--disabled');
+  };
+
   var adFormCapacityInit = function () {
     adFormCapacity.options[0].disabled = true;
     adFormCapacity.options[1].disabled = true;
@@ -21,6 +34,7 @@
   var adFormPriceInit = function () {
     adFormPrice.min = 1000;
     adFormPrice.placeholder = '1000';
+    adFormPrice.value = '';
   };
   var adFormTypeInit = function () {
     adFormType.options[1].selected = true;
@@ -31,6 +45,56 @@
   };
   var adFormAddressInit = function () {
     window.data.adFormAddress.value = window.data.WIDTH_MAP / 2 + ',' + window.data.HEIGHT_MAP / 2;
+  };
+  var adFormTitleInit = function () {
+    adFormTitle.value = '';
+  };
+
+  var adFormReset = function () {
+    adFormAddressInit();
+    adFormCapacityInit();
+    adFormPriceInit();
+    adFormTypeInit();
+    adFormTimeInit();
+    adFormTitleInit();
+    hideAdForm();
+
+    window.pins.deletePins();
+    window.map.hideMap();
+  };
+
+  var successUpLoadAdForm = function () {
+    adFormReset();
+
+    document.querySelector('main').appendChild(popapSuccessAdForm);
+    document.addEventListener('click', function () {
+      popapSuccessAdForm.parentNode.removeChild(popapSuccessAdForm);
+    });
+    document.addEventListener('keydown', function (evt) {
+      if (evt.keyCode === ESC_KEYCODE) {
+        popapSuccessAdForm.parentNode.removeChild(popapSuccessAdForm);
+      }
+    });
+  };
+
+  var errorUpLoadAddForm = function () {
+    document.querySelector('main').appendChild(popapErrorAdForm);
+    document.addEventListener('click', function () {
+      popapErrorAdForm.parentNode.removeChild(popapErrorAdForm);
+    });
+    document.addEventListener('keydown', function (evt) {
+      if (evt.keyCode === ESC_KEYCODE) {
+        popapErrorAdForm.parentNode.removeChild(popapErrorAdForm);
+      }
+    });
+    popapErorAdFormClose.addEventListener('click', function () {
+      popapErrorAdForm.parentNode.removeChild(popapErrorAdForm);
+    });
+    popapErorAdFormClose.addEventListener('keydown', function (evt) {
+      if (evt.keyCode === ENTER_KEYCODE) {
+        popapErrorAdForm.parentNode.removeChild(popapErrorAdForm);
+      }
+    });
   };
 
 
@@ -70,7 +134,7 @@
     if ((selectCapacityOption.disabled)) {
       adFormCapacity.setCustomValidity('Неверное количество мест');
     } else {
-      adFormCapacity.target.setCustomValidity('');
+      adFormCapacity.setCustomValidity('');
     }
   });
   adFormCapacity.addEventListener('change', function () {
@@ -126,6 +190,20 @@
     }
     if (adFormTimeOut.options.selectedIndex === 3) {
       adFormTimeIn.options[3].selected = true;
+    }
+  });
+
+  adForm.addEventListener('submit', function (evt) {
+    window.backend.adFormUpload(new FormData(adForm), successUpLoadAdForm, errorUpLoadAddForm);
+    evt.preventDefault();
+  });
+
+  adFormResetButon.addEventListener('click', function () {
+    adFormReset();
+  });
+  adFormResetButon.addEventListener('keydown', function (evt) {
+    if (evt.keyCode === ENTER_KEYCODE) {
+      adFormReset();
     }
   });
 
