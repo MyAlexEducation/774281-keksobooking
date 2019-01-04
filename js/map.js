@@ -59,14 +59,14 @@
 
     showMap();
     window.adForm.showAdForm();
-    window.pins.showPins();
+    window.pins.showPins(window.filtersForm.filtersBuildings);
   });
 
   window.data.map.addEventListener('click', function (evt) {
     var target = evt.target;
     while (target !== window.data.map) {
       if (target.hasAttribute('data--pin-index')) {
-        window.card.createCards(window.data.buildings, parseInt(target.dataset.PinIndex, 10));
+        window.card.createCards(window.filtersForm.filtersBuildings, parseInt(target.dataset.PinIndex, 10));
         window.card.showCards();
         window.card.currentCard.remove();
         window.card.currentCard = window.data.map.querySelector('.map__card');

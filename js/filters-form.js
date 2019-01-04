@@ -2,7 +2,7 @@
 
 (function () {
   var MAX_NUMBER_PINS = 5;
-  var filtersBuildings = [];
+  var filtersBuildings = window.data.buildings;
   var rangePrice = {
     middle: {
       min: 10000,
@@ -21,6 +21,8 @@
       max: Infinity
     }
   };
+
+
 
   var filtersForm = document.querySelector('.map__filters');
   var filtersHousingType = filtersForm.querySelector('#housing-type');
@@ -60,10 +62,12 @@
   filtersForm.addEventListener('change', function () {
     filtersBuildings = window.data.buildings;
     filtersBuildings = window.data.buildings.filter(isFiltersBuilding);
-    if (filtersBuildings.length > 5) {
-      filtersBuildings.length = 5;
+    if (filtersBuildings.length > MAX_NUMBER_PINS) {
+      filtersBuildings.length = MAX_NUMBER_PINS;
     }
-    console.log(filtersBuildings);
+    window.filtersForm.filtersBuildings = filtersBuildings;
+    window.pins.deletePins();
+    window.pins.showPins();
   });
 
   window.filtersForm = {
