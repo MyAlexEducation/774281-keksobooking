@@ -61,6 +61,7 @@
 
     window.pins.deletePins();
     window.map.hideMap();
+    window.card.currentCard.style.display = 'none';
   };
 
   var successUpLoadAdForm = function () {
