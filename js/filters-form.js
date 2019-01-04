@@ -49,7 +49,8 @@
   var isFiltersBuilding = function (building) {
     return isBuildingProperty(filtersHousingType, building.offer.type)
       && isBuildingPrice(building.offer.price)
-      && isBuildingProperty(filtersHousingRooms, building.offer.rooms);
+      && isBuildingProperty(filtersHousingRooms, building.offer.rooms)
+      && isBuildingProperty(filtersHousingGuests, building.offer.guests);
   };
 
   filtersForm.addEventListener('change', function () {
