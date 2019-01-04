@@ -3,6 +3,24 @@
 (function () {
   var MAX_NUMBER_PINS = 5;
   var filtersBuildings = [];
+  var rangePrice = {
+    middle: {
+      min: 10000,
+      max: 50000
+    },
+    low: {
+      min: 0,
+      max: 10000
+    },
+    high: {
+      min: 50000,
+      max: Infinity
+    },
+    any: {
+      min: 0,
+      max: Infinity
+    }
+  };
 
   var filtersForm = document.querySelector('.map__filters');
   var filtersHousingType = filtersForm.querySelector('#housing-type');
@@ -19,16 +37,22 @@
   var isBuildingProperty = function (filtersProperty, buildingProperty) {
     return filtersProperty.value === 'any' || filtersProperty.value === buildingProperty;
   };
+  var isBuildingPrice = function (buildingProperty) {
+    return buildingProperty >= rangePrice[filtersHousingPrice.value].min
+      && buildingProperty < rangePrice[filtersHousingPrice.value].max;
+  };
   var isBuildingFeature = function (filtersFeature, buildingFeatures) {
     return !filtersFeature.checked || buildingFeatures.includes(filtersFeature.value);
   };
   var isFiltersBuilding = function (building) {
-    return isBuildingProperty(filtersHousingType, building.offer.type);
+    return isBuildingProperty(filtersHousingType, building.offer.type)
+      && isBuildingPrice(building.offer.price);
   };
 
   filtersForm.addEventListener('change', function () {
     filtersBuildings = window.data.buildings;
     filtersBuildings = window.data.buildings.filter(isFiltersBuilding);
+    console.log(filtersBuildings);
   });
 
   window.filtersForm = {
