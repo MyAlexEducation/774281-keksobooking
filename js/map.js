@@ -18,11 +18,13 @@
     if (window.data.map.classList.contains('map--faded')) {
       window.backend.buildingsLoad(function (loadBuildings) {
         window.data.buildings = loadBuildings;
+        window.filtersForm.filtersBuildings = window.data.buildings.filter(window.filtersForm.isFiltersBuilding);
+        if (window.filtersForm.filtersBuildings.length > window.filtersForm.MAX_NUMBER_PINS) {
+          window.filtersForm.filtersBuildings.length = window.filtersForm.MAX_NUMBER_PINS;
+        }
+        console.log(window.data.buildings);
+        window.pins.showPins(window.filtersForm.filtersBuildings);
       });
-      window.filtersForm.filtersBuildings = window.data.buildings.filter(window.filtersForm.isFiltersBuilding);
-      if (window.filtersForm.filtersBuildings.length > window.filtersForm.MAX_NUMBER_PINS) {
-        window.filtersForm.filtersBuildings.length = window.filtersForm.MAX_NUMBER_PINS;
-      }
     }
 
     var startCoords = {
@@ -71,7 +73,6 @@
 
     showMap();
     window.adForm.showAdForm();
-    window.pins.showPins(window.filtersForm.filtersBuildings);
   });
 
   window.data.map.addEventListener('click', function (evt) {
