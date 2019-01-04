@@ -22,8 +22,6 @@
     }
   };
 
-
-
   var filtersForm = document.querySelector('.map__filters');
   var filtersHousingType = filtersForm.querySelector('#housing-type');
   var filtersHousingPrice = filtersForm.querySelector('#housing-price');
@@ -66,6 +64,7 @@
       filtersBuildings.length = MAX_NUMBER_PINS;
     }
     window.filtersForm.filtersBuildings = filtersBuildings;
+    window.card.currentCard.style.display = 'none';
     window.pins.deletePins();
     window.pins.showPins();
   });
