@@ -50,7 +50,13 @@
     return isBuildingProperty(filtersHousingType, building.offer.type)
       && isBuildingPrice(building.offer.price)
       && isBuildingProperty(filtersHousingRooms, building.offer.rooms)
-      && isBuildingProperty(filtersHousingGuests, building.offer.guests);
+      && isBuildingProperty(filtersHousingGuests, building.offer.guests)
+      && isBuildingFeature(filtersHousingFeaturesWifi, building.offer.features)
+      && isBuildingFeature(filtersHousingFeaturesDishwasher, building.offer.features)
+      && isBuildingFeature(filtersHousingFeaturesParking, building.offer.features)
+      && isBuildingFeature(filtersHousingFeaturesWasher, building.offer.features)
+      && isBuildingFeature(filtersHousingFeaturesElevator, building.offer.features)
+      && isBuildingFeature(filtersHousingFeaturesConditioner, building.offer.features);
   };
 
   filtersForm.addEventListener('change', function () {
