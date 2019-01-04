@@ -35,8 +35,6 @@
   var filtersHousingFeaturesConditioner = filtersForm.querySelector('#filter-conditioner');
 
   var isBuildingProperty = function (filtersProperty, buildingProperty) {
-    console.log(filtersProperty.value);
-    console.log(buildingProperty);
     return filtersProperty.value === 'any' || filtersProperty.value === buildingProperty.toString();
   };
   var isBuildingPrice = function (buildingProperty) {
@@ -62,6 +60,9 @@
   filtersForm.addEventListener('change', function () {
     filtersBuildings = window.data.buildings;
     filtersBuildings = window.data.buildings.filter(isFiltersBuilding);
+    if (filtersBuildings.length > 5) {
+      filtersBuildings.length = 5;
+    }
     console.log(filtersBuildings);
   });
 
