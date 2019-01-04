@@ -35,7 +35,9 @@
   var filtersHousingFeaturesConditioner = filtersForm.querySelector('#filter-conditioner');
 
   var isBuildingProperty = function (filtersProperty, buildingProperty) {
-    return filtersProperty.value === 'any' || filtersProperty.value === buildingProperty;
+    console.log(filtersProperty.value);
+    console.log(buildingProperty);
+    return filtersProperty.value === 'any' || filtersProperty.value === buildingProperty.toString();
   };
   var isBuildingPrice = function (buildingProperty) {
     return buildingProperty >= rangePrice[filtersHousingPrice.value].min
@@ -46,7 +48,8 @@
   };
   var isFiltersBuilding = function (building) {
     return isBuildingProperty(filtersHousingType, building.offer.type)
-      && isBuildingPrice(building.offer.price);
+      && isBuildingPrice(building.offer.price)
+      && isBuildingProperty(filtersHousingRooms, building.offer.rooms);
   };
 
   filtersForm.addEventListener('change', function () {
