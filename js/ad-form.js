@@ -69,11 +69,11 @@
 
     document.querySelector('main').appendChild(popapSuccessAdForm);
     document.addEventListener('click', function () {
-      popapSuccessAdForm.parentNode.removeChild(popapSuccessAdForm);
+      document.removeChild(popapSuccessAdForm);
     });
     document.addEventListener('keydown', function (evt) {
       if (evt.keyCode === ESC_KEYCODE) {
-        popapSuccessAdForm.parentNode.removeChild(popapSuccessAdForm);
+        document.removeChild(popapSuccessAdForm);
       }
     });
   };
