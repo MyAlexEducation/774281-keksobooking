@@ -15,6 +15,13 @@
   window.data.mainPin.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
 
+    if (window.data.map.classList.contains('map--faded')) {
+      window.backend.buildingsLoad(function (loadBuildings) {
+        window.data.buildings = loadBuildings;
+      });
+      window.filtersForm.filtersBuildings = window.data.buildings;
+    }
+
     var startCoords = {
       x: evt.clientX,
       y: evt.clientY
@@ -66,6 +73,7 @@
 
   window.data.map.addEventListener('click', function (evt) {
     var target = evt.target;
+
     while (target !== window.data.map) {
       if (target.hasAttribute('data--pin-index')) {
         currentPin.classList.remove('map__pin--active');

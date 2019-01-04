@@ -81,19 +81,19 @@
   var errorUpLoadAddForm = function () {
     document.querySelector('main').appendChild(popapErrorAdForm);
     document.addEventListener('click', function () {
-      popapErrorAdForm.parentNode.removeChild(popapErrorAdForm);
+      document.removeChild(popapErrorAdForm);
     });
     document.addEventListener('keydown', function (evt) {
       if (evt.keyCode === ESC_KEYCODE) {
-        popapErrorAdForm.parentNode.removeChild(popapErrorAdForm);
+        document.removeChild(popapErrorAdForm);
       }
     });
     popapErorAdFormClose.addEventListener('click', function () {
-      popapErrorAdForm.parentNode.removeChild(popapErrorAdForm);
+      document.removeChild(popapErrorAdForm);
     });
     popapErorAdFormClose.addEventListener('keydown', function (evt) {
       if (evt.keyCode === ENTER_KEYCODE) {
-        popapErrorAdForm.parentNode.removeChild(popapErrorAdForm);
+        document.removeChild(popapErrorAdForm);
       }
     });
   };
