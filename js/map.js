@@ -22,7 +22,6 @@
         if (window.filtersForm.filtersBuildings.length > window.filtersForm.MAX_NUMBER_PINS) {
           window.filtersForm.filtersBuildings.length = window.filtersForm.MAX_NUMBER_PINS;
         }
-        console.log(window.data.buildings);
         window.pins.showPins(window.filtersForm.filtersBuildings);
       });
     }
@@ -83,6 +82,7 @@
         currentPin.classList.remove('map__pin--active');
         currentPin = target;
         currentPin.classList.add('map__pin--active');
+        window.card.currentCard.style.display = 'block';
         window.card.createCards(window.filtersForm.filtersBuildings, parseInt(target.dataset.PinIndex, 10));
         window.card.showCards();
         window.card.currentCard.remove();
