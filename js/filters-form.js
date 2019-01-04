@@ -70,6 +70,8 @@
   }));
 
   window.filtersForm = {
-    filtersBuildings: filtersBuildings
+    MAX_NUMBER_PINS: MAX_NUMBER_PINS,
+    filtersBuildings: filtersBuildings,
+    isFiltersBuilding: isFiltersBuilding
   };
 })();

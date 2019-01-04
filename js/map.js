@@ -19,7 +19,10 @@
       window.backend.buildingsLoad(function (loadBuildings) {
         window.data.buildings = loadBuildings;
       });
-      window.filtersForm.filtersBuildings = window.data.buildings;
+      window.filtersForm.filtersBuildings = window.data.buildings.filter(window.filtersForm.isFiltersBuilding);
+      if (window.filtersForm.filtersBuildings.length > window.filtersForm.MAX_NUMBER_PINS) {
+        window.filtersForm.filtersBuildings.length = window.filtersForm.MAX_NUMBER_PINS;
+      }
     }
 
     var startCoords = {
