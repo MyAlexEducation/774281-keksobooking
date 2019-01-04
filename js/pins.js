@@ -36,7 +36,7 @@
   };
 
   var showPins = function () {
-    createPins(window.data.buildings);
+    createPins(window.filtersForm.filtersBuildings);
     pinsContainer.appendChild(window.data.fragment);
   };
 

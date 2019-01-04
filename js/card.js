@@ -48,6 +48,6 @@
     currentCard: currentCard,
     cardClose: cardClose,
     createCards: createCards,
-    showCards: showCards
+    showCards: showCards,
   };
 })();

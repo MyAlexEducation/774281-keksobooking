@@ -61,6 +61,7 @@
 
     window.pins.deletePins();
     window.map.hideMap();
+    window.card.currentCard.style.display = 'none';
   };
 
   var successUpLoadAdForm = function () {
@@ -68,10 +69,12 @@
 
     document.querySelector('main').appendChild(popapSuccessAdForm);
     document.addEventListener('click', function () {
-      popapSuccessAdForm.parentNode.removeChild(popapSuccessAdForm);
+      if (document.contains(popapSuccessAdForm)) {
+        popapSuccessAdForm.parentNode.removeChild(popapSuccessAdForm);
+      }
     });
     document.addEventListener('keydown', function (evt) {
-      if (evt.keyCode === ESC_KEYCODE) {
+      if (evt.keyCode === ESC_KEYCODE && document.contains(popapSuccessAdForm)) {
         popapSuccessAdForm.parentNode.removeChild(popapSuccessAdForm);
       }
     });
@@ -79,19 +82,24 @@
 
   var errorUpLoadAddForm = function () {
     document.querySelector('main').appendChild(popapErrorAdForm);
+
     document.addEventListener('click', function () {
-      popapErrorAdForm.parentNode.removeChild(popapErrorAdForm);
+      if (document.contains(popapErrorAdForm)) {
+        popapErrorAdForm.parentNode.removeChild(popapErrorAdForm);
+      }
     });
     document.addEventListener('keydown', function (evt) {
-      if (evt.keyCode === ESC_KEYCODE) {
+      if (evt.keyCode === ESC_KEYCODE && document.contains(popapErrorAdForm)) {
         popapErrorAdForm.parentNode.removeChild(popapErrorAdForm);
       }
     });
     popapErorAdFormClose.addEventListener('click', function () {
-      popapErrorAdForm.parentNode.removeChild(popapErrorAdForm);
+      if (document.contains(popapErrorAdForm)) {
+        popapErrorAdForm.parentNode.removeChild(popapErrorAdForm);
+      }
     });
     popapErorAdFormClose.addEventListener('keydown', function (evt) {
-      if (evt.keyCode === ENTER_KEYCODE) {
+      if (evt.keyCode === ENTER_KEYCODE && document.contains(popapErrorAdForm)) {
         popapErrorAdForm.parentNode.removeChild(popapErrorAdForm);
       }
     });
@@ -109,20 +117,17 @@
       adFormCapacity.options[1].disabled = true;
       adFormCapacity.options[2].disabled = false;
       adFormCapacity.options[3].disabled = true;
-    } else
-    if (adFormRoomNumber.options.selectedIndex === 1) {
+    } else if (adFormRoomNumber.options.selectedIndex === 1) {
       adFormCapacity.options[0].disabled = true;
       adFormCapacity.options[1].disabled = false;
       adFormCapacity.options[2].disabled = false;
       adFormCapacity.options[3].disabled = true;
-    } else
-    if (adFormRoomNumber.options.selectedIndex === 2) {
+    } else if (adFormRoomNumber.options.selectedIndex === 2) {
       adFormCapacity.options[0].disabled = false;
       adFormCapacity.options[1].disabled = false;
       adFormCapacity.options[2].disabled = false;
       adFormCapacity.options[3].disabled = true;
-    } else
-    if (adFormRoomNumber.options.selectedIndex === 3) {
+    } else if (adFormRoomNumber.options.selectedIndex === 3) {
       adFormCapacity.options[0].disabled = true;
       adFormCapacity.options[1].disabled = true;
       adFormCapacity.options[2].disabled = true;
@@ -149,16 +154,13 @@
     if (adFormType.options.selectedIndex === 0) {
       adFormPrice.min = 0;
       adFormPrice.placeholder = '0';
-    } else
-    if (adFormType.options.selectedIndex === 1) {
+    } else if (adFormType.options.selectedIndex === 1) {
       adFormPrice.min = 1000;
       adFormPrice.placeholder = '1000';
-    } else
-    if (adFormType.options.selectedIndex === 2) {
+    } else if (adFormType.options.selectedIndex === 2) {
       adFormPrice.min = 5000;
       adFormPrice.placeholder = '5000';
-    } else
-    if (adFormType.options.selectedIndex === 3) {
+    } else if (adFormType.options.selectedIndex === 3) {
       adFormPrice.min = 10000;
       adFormPrice.placeholder = '10000';
     }

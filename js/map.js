@@ -1,6 +1,8 @@
 'use strict';
 
 (function () {
+  var currentPin = window.data.mainPin;
+
   var showMap = function () {
     window.data.map.classList.remove('map--faded');
   };
@@ -12,6 +14,17 @@
 
   window.data.mainPin.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
+
+    if (window.data.map.classList.contains('map--faded')) {
+      window.backend.buildingsLoad(function (loadBuildings) {
+        window.data.buildings = loadBuildings;
+        window.filtersForm.filtersBuildings = window.data.buildings.filter(window.filtersForm.isFiltersBuilding);
+        if (window.filtersForm.filtersBuildings.length > window.filtersForm.MAX_NUMBER_PINS) {
+          window.filtersForm.filtersBuildings.length = window.filtersForm.MAX_NUMBER_PINS;
+        }
+        window.pins.showPins(window.filtersForm.filtersBuildings);
+      });
+    }
 
     var startCoords = {
       x: evt.clientX,
@@ -59,14 +72,18 @@
 
     showMap();
     window.adForm.showAdForm();
-    window.pins.showPins();
   });
 
   window.data.map.addEventListener('click', function (evt) {
     var target = evt.target;
+
     while (target !== window.data.map) {
       if (target.hasAttribute('data--pin-index')) {
-        window.card.createCards(window.data.buildings, parseInt(target.dataset.PinIndex, 10));
+        currentPin.classList.remove('map__pin--active');
+        currentPin = target;
+        currentPin.classList.add('map__pin--active');
+        window.card.currentCard.style.display = 'block';
+        window.card.createCards(window.filtersForm.filtersBuildings, parseInt(target.dataset.PinIndex, 10));
         window.card.showCards();
         window.card.currentCard.remove();
         window.card.currentCard = window.data.map.querySelector('.map__card');
