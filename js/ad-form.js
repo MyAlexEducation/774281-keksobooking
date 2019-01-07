@@ -13,6 +13,7 @@
   var adFormTimeOut = adForm.querySelector('#timeout');
   var adFormTitle = adForm.querySelector('#title');
   var adFormResetButon = adForm.querySelector('.ad-form__reset');
+  var adFormFeatures = adForm.querySelectorAll('input[name = features]');
 
   var popapSuccessAdForm = document.querySelector('#success').content.querySelector('.success');
   var popapErrorAdForm = document.querySelector('#error').content.querySelector('.error');
@@ -49,6 +50,11 @@
   var adFormTitleInit = function () {
     adFormTitle.value = '';
   };
+  var adFormFeatresInit = function () {
+    adFormFeatures.forEach(function (feature) {
+      feature.checked = false;
+    });
+  };
 
   var adFormReset = function () {
     adFormAddressInit();
@@ -57,6 +63,7 @@
     adFormTypeInit();
     adFormTimeInit();
     adFormTitleInit();
+    adFormFeatresInit();
     hideAdForm();
 
     window.pins.deletePins();
