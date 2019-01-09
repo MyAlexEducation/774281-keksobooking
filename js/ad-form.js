@@ -1,6 +1,8 @@
 'use strict';
 
 (function () {
+  var IMAGE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+
   var ESC_KEYCODE = 27;
   var ENTER_KEYCODE = 13;
 
@@ -14,6 +16,10 @@
   var adFormTitle = adForm.querySelector('#title');
   var adFormResetButon = adForm.querySelector('.ad-form__reset');
   var adFormFeatures = adForm.querySelectorAll('input[name = features]');
+  var adFormAvatarLoader = adForm.querySelector('#avatar');
+  var afFormAvatarPreview = adForm.querySelector('.ad-form-header__preview');
+  var adFormPhotoLoader = adForm.querySelector('#images');
+  var adFormPhotoContainer = adForm.querySelector('.ad-form__photo');
 
   var popapSuccessAdForm = document.querySelector('#success').content.querySelector('.success');
   var popapErrorAdForm = document.querySelector('#error').content.querySelector('.error');
