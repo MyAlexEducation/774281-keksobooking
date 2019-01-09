@@ -31,14 +31,14 @@
   };
 
   var adFormClose = function () {
-    for (var i = 0; i < adFormElements.length; i++) { // forEach выдаёт ошибку
-      adFormElements[i].disabled = true;
-    }
+    Array.prototype.forEach.call(adFormElements, function (element) {
+      element.disabled = true;
+    });
   };
   var adFormOpen = function () {
-    for (var i = 0; i < adFormElements.length; i++) { // forEach выдаёт ошибку
-      adFormElements[i].disabled = false;
-    }
+    Array.prototype.forEach.call(adFormElements, function (element) {
+      element.disabled = false;
+    });
   };
   var adFormCapacityInit = function () {
     adFormCapacity.options[0].disabled = true;
