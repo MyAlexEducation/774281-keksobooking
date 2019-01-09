@@ -7,6 +7,7 @@
   var ENTER_KEYCODE = 13;
 
   var adForm = document.querySelector('.ad-form');
+  var adFormElements = adForm.elements;
   var adFormRoomNumber = adForm.querySelector('#room_number');
   var adFormCapacity = adForm.querySelector('#capacity');
   var adFormType = adForm.querySelector('#type');
@@ -27,11 +28,23 @@
 
   var showAdForm = function () {
     adForm.classList.remove('ad-form--disabled');
+    adFormOpen();
   };
   var hideAdForm = function () {
     adForm.classList.add('ad-form--disabled');
+    adFormClose();
   };
 
+  var adFormClose = function () {
+    for (var i = 0; i < adFormElements.length; i++) { //forEach выдаёт ошибку
+      adFormElements[i].disabled = true;
+    }
+  };
+  var adFormOpen = function () {
+    for (var i = 0; i < adFormElements.length; i++) { //forEach выдаёт ошибку
+      adFormElements[i].disabled = false;
+    }
+  };
   var adFormCapacityInit = function () {
     adFormCapacity.options[0].disabled = true;
     adFormCapacity.options[1].disabled = true;
@@ -132,6 +145,7 @@
   adFormPriceInit();
   adFormTypeInit();
   adFormTimeInit();
+  adFormClose();
   adFormRoomNumber.addEventListener('change', function () {
     if (adFormRoomNumber.options.selectedIndex === 0) {
       adFormCapacity.options[0].disabled = true;
