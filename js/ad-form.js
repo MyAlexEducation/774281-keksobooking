@@ -1,11 +1,6 @@
 'use strict';
 
 (function () {
-  var IMAGE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
-
-  var ESC_KEYCODE = 27;
-  var ENTER_KEYCODE = 13;
-
   var adForm = document.querySelector('.ad-form');
   var adFormElements = adForm.elements;
   var adFormRoomNumber = adForm.querySelector('#room_number');
@@ -36,12 +31,12 @@
   };
 
   var adFormClose = function () {
-    for (var i = 0; i < adFormElements.length; i++) { //forEach выдаёт ошибку
+    for (var i = 0; i < adFormElements.length; i++) { // forEach выдаёт ошибку
       adFormElements[i].disabled = true;
     }
   };
   var adFormOpen = function () {
-    for (var i = 0; i < adFormElements.length; i++) { //forEach выдаёт ошибку
+    for (var i = 0; i < adFormElements.length; i++) { // forEach выдаёт ошибку
       adFormElements[i].disabled = false;
     }
   };
@@ -108,7 +103,7 @@
       }
     });
     document.addEventListener('keydown', function (evt) {
-      if (evt.keyCode === ESC_KEYCODE && document.contains(popapSuccessAdForm)) {
+      if (evt.keyCode === window.data.ESC_KEYCODE && document.contains(popapSuccessAdForm)) {
         popapSuccessAdForm.parentNode.removeChild(popapSuccessAdForm);
       }
     });
@@ -123,7 +118,7 @@
       }
     });
     document.addEventListener('keydown', function (evt) {
-      if (evt.keyCode === ESC_KEYCODE && document.contains(popapErrorAdForm)) {
+      if (evt.keyCode === window.data.ESC_KEYCODE && document.contains(popapErrorAdForm)) {
         popapErrorAdForm.parentNode.removeChild(popapErrorAdForm);
       }
     });
@@ -133,7 +128,7 @@
       }
     });
     popapErorAdFormClose.addEventListener('keydown', function (evt) {
-      if (evt.keyCode === ENTER_KEYCODE && document.contains(popapErrorAdForm)) {
+      if (evt.keyCode === window.data.ENTER_KEYCODE && document.contains(popapErrorAdForm)) {
         popapErrorAdForm.parentNode.removeChild(popapErrorAdForm);
       }
     });
@@ -239,7 +234,7 @@
     adFormReset();
   });
   adFormResetButon.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === ENTER_KEYCODE) {
+    if (evt.keyCode === window.data.ENTER_KEYCODE) {
       adFormReset();
     }
   });
@@ -248,7 +243,7 @@
     var file = adFormAvatarLoader.files[0];
     var fileName = file.name.toLocaleLowerCase();
 
-    var matches = IMAGE_TYPES.some(function (it) {
+    var matches = window.data.IMAGE_TYPES.some(function (it) {
       return fileName.endsWith(it);
     });
 
@@ -264,7 +259,7 @@
     var file = adFormPhotoLoader.files[adFormPhotoLoader.files.length - 1];
     var fileName = file.name.toLocaleLowerCase();
 
-    var matches = IMAGE_TYPES.some(function (it) {
+    var matches = window.data.IMAGE_TYPES.some(function (it) {
       return fileName.endsWith(it);
     });
 

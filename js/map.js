@@ -91,6 +91,11 @@
         window.card.cardClose.addEventListener('click', function () {
           window.card.currentCard.style.display = 'none';
         });
+        document.addEventListener('keydown', function (event) {
+          if (event.keyCode === window.data.ESC_KEYCODE) {
+            window.card.currentCard.style.display = 'none';
+          }
+        });
         window.data.adFormAddress.value = window.card.currentCard.querySelector('.popup__text--address').innerHTML;
       }
       target = target.parentNode;

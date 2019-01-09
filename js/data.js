@@ -3,6 +3,11 @@
 (function () {
   var fragment = document.createDocumentFragment();
 
+  var IMAGE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+
+  var ESC_KEYCODE = 27;
+  var ENTER_KEYCODE = 13;
+
   var buildings = [];
   var types = ['palace', 'flat', 'house', 'bungalo'];
 
@@ -46,6 +51,9 @@
     MIN_LOCATION_X: MIN_LOCATION_X,
     MAX_LOCATION_X: MAX_LOCATION_X,
     MIN_LOCATION_Y: MIN_LOCATION_Y,
-    MAX_LOCATION_Y: MAX_LOCATION_Y
+    MAX_LOCATION_Y: MAX_LOCATION_Y,
+    IMAGE_TYPES: IMAGE_TYPES,
+    ESC_KEYCODE: ESC_KEYCODE,
+    ENTER_KEYCODE: ENTER_KEYCODE
   };
 })();
