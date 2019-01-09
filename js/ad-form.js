@@ -61,6 +61,12 @@
       feature.checked = false;
     });
   };
+  var afFormAvatarPreviewInit = function () {
+    afFormAvatarPreview.src = 'img/muffin-grey.svg';
+  };
+  var adFormPhotoContainerInit = function () {
+    adFormPhotoContainer.innerHTML = '';
+  };
 
   var adFormReset = function () {
     adFormAddressInit();
@@ -71,6 +77,8 @@
     adFormTitleInit();
     adFormFeatresInit();
     hideAdForm();
+    afFormAvatarPreviewInit();
+    adFormPhotoContainerInit();
 
     window.pins.deletePins();
     window.map.hideMap();
