@@ -76,6 +76,12 @@
 
   window.data.map.addEventListener('click', function (evt) {
     var target = evt.target;
+    var cardCloseEnter = function (evtCard) {
+      if (evtCard.keyCode === window.data.ESC_KEYCODE) {
+        window.card.currentCard.style.display = 'none';
+        document.removeEventListener('keydown', cardCloseEnter);
+      }
+    };
 
     while (target !== window.data.map) {
       if (target.hasAttribute('data--pin-index')) {
@@ -91,11 +97,7 @@
         window.card.cardClose.addEventListener('click', function () {
           window.card.currentCard.style.display = 'none';
         });
-        document.addEventListener('keydown', function (evtCard) {
-          if (evtCard.keyCode === window.data.ESC_KEYCODE) {
-            window.card.currentCard.style.display = 'none';
-          }
-        });
+        document.addEventListener('keydown', cardCloseEnter);
         window.data.adFormAddress.value = window.card.currentCard.querySelector('.popup__text--address').innerHTML;
       }
       target = target.parentNode;
