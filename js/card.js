@@ -15,7 +15,7 @@
     while (building.offer.type !== window.data.types[indexType] && indexType < textTypes.length) {
       indexType++;
     }
-    card.querySelector('.popup__type').textContent = window.data.types[indexType];
+    card.querySelector('.popup__type').textContent = textTypes[indexType];
     card.querySelector('.popup__text--capacity').textContent = building.offer.rooms + ' комнаты для ' + building.offer.guests + ' гостей';
     card.querySelector('.popup__text--time').textContent = 'Заезд после ' + building.offer.checkin + ', выезд до ' + building.offer.checkout;
     card.querySelector('.popup__features').textContent = '';
