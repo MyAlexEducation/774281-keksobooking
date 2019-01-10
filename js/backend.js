@@ -4,7 +4,7 @@
   var adFormAction = 'https://js.dump.academy/keksobooking';
   var getBuildingsURL = 'https://js.dump.academy/keksobooking/data';
 
-  var serverCode = {
+  var ServerCode = {
     ok: 200
   };
   var maxLoadTime = 10000;
@@ -14,7 +14,7 @@
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
-      if (xhr.status === serverCode.ok) {
+      if (xhr.status === ServerCode.ok) {
         onLoad(xhr.response);
       } else {
         onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
@@ -30,7 +30,7 @@
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
-      if (xhr.status === serverCode.ok) {
+      if (xhr.status === ServerCode.OK) {
         onLoad(xhr.response);
       } else {
         onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
