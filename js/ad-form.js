@@ -97,40 +97,34 @@
     window.card.currentCard.style.display = 'none';
   };
 
-  var popapSuccessAdFormCloseClick = function () {
+  var onDocumentClick = function () {
     if (document.contains(popapSuccessAdForm)) {
       popapSuccessAdForm.parentNode.removeChild(popapSuccessAdForm);
-      document.removeEventListener('click', popapSuccessAdFormCloseClick);
+      document.removeEventListener('click', onDocumentClick);
+    } else if (document.contains(popapErrorAdForm)) {
+      popapErrorAdForm.parentNode.removeChild(popapErrorAdForm);
+      document.removeEventListener('click', onDocumentClick);
     }
   };
-  var popapSuccessAdFormCloseEsc = function (evt) {
+  var onDocumentKeydown = function (evt) {
     if (evt.keyCode === window.data.ESC_KEYCODE && document.contains(popapSuccessAdForm)) {
       popapSuccessAdForm.parentNode.removeChild(popapSuccessAdForm);
-      document.removeEventListener('click', popapSuccessAdFormCloseEsc);
+      document.removeEventListener('keydown', onDocumentKeydown);
+    } else if (evt.keyCode === window.data.ESC_KEYCODE && document.contains(popapErrorAdForm)) {
+      popapErrorAdForm.parentNode.removeChild(popapErrorAdForm);
+      document.removeEventListener('click', onDocumentKeydown);
     }
   };
-  var popapErrorAdFormCloseClick = function () {
+  var onPopapErrorAdFormCloseClick = function () {
     if (document.contains(popapErrorAdForm)) {
       popapErrorAdForm.parentNode.removeChild(popapErrorAdForm);
-      document.removeEventListener('click', popapErrorAdFormCloseClick);
+      popapErorAdFormClose.removeEventListener('click', onPopapErrorAdFormCloseClick);
     }
   };
-  var popapErrorAdFormCloseEsc = function (evt) {
-    if (evt.keyCode === window.data.ESC_KEYCODE && document.contains(popapErrorAdForm)) {
-      popapErrorAdForm.parentNode.removeChild(popapErrorAdForm);
-      document.removeEventListener('click', popapErrorAdFormCloseEsc);
-    }
-  };
-  var popapErrorAdFormCloseButton = function () {
-    if (document.contains(popapErrorAdForm)) {
-      popapErrorAdForm.parentNode.removeChild(popapErrorAdForm);
-      popapErorAdFormClose.removeEventListener('click', popapErrorAdFormCloseButton);
-    }
-  };
-  var popapErrorAdFormCloseButtonEnter = function (evt) {
+  var onPopapErrorAdFormCloseKeydown = function (evt) {
     if (evt.keyCode === window.data.ENTER_KEYCODE && document.contains(popapErrorAdForm)) {
       popapErrorAdForm.parentNode.removeChild(popapErrorAdForm);
-      popapErorAdFormClose.removeEventListener('keydown', popapErrorAdFormCloseButtonEnter);
+      popapErorAdFormClose.removeEventListener('keydown', onPopapErrorAdFormCloseKeydown);
     }
   };
 
@@ -138,17 +132,17 @@
     adFormReset();
 
     document.querySelector('main').appendChild(popapSuccessAdForm);
-    document.addEventListener('click', popapSuccessAdFormCloseClick);
-    document.addEventListener('keydown', popapSuccessAdFormCloseEsc);
+    document.addEventListener('click', onDocumentClick);
+    document.addEventListener('keydown', onDocumentKeydown);
   };
 
   var errorUpLoadAddForm = function () {
     document.querySelector('main').appendChild(popapErrorAdForm);
 
-    document.addEventListener('click', popapErrorAdFormCloseClick);
-    document.addEventListener('keydown', popapErrorAdFormCloseEsc);
-    popapErorAdFormClose.addEventListener('click', popapErrorAdFormCloseButton);
-    popapErorAdFormClose.addEventListener('keydown', popapErrorAdFormCloseButtonEnter);
+    document.addEventListener('click', onDocumentClick);
+    document.addEventListener('keydown', onDocumentKeydown);
+    popapErorAdFormClose.addEventListener('click', onPopapErrorAdFormCloseClick);
+    popapErorAdFormClose.addEventListener('keydown', onPopapErrorAdFormCloseKeydown);
   };
 
 

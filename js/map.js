@@ -76,10 +76,10 @@
 
   window.data.map.addEventListener('click', function (evt) {
     var target = evt.target;
-    var cardCloseEnter = function (evtCard) {
+    var onDocumentKeydown = function (evtCard) {
       if (evtCard.keyCode === window.data.ESC_KEYCODE) {
         window.card.currentCard.style.display = 'none';
-        document.removeEventListener('keydown', cardCloseEnter);
+        document.removeEventListener('keydown', onDocumentKeydown);
       }
     };
 
@@ -97,7 +97,7 @@
         window.card.cardClose.addEventListener('click', function () {
           window.card.currentCard.style.display = 'none';
         });
-        document.addEventListener('keydown', cardCloseEnter);
+        document.addEventListener('keydown', onDocumentKeydown);
         window.data.adFormAddress.value = window.card.currentCard.querySelector('.popup__text--address').innerHTML;
       }
       target = target.parentNode;
