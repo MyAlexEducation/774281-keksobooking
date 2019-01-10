@@ -91,8 +91,8 @@
         window.card.cardClose.addEventListener('click', function () {
           window.card.currentCard.style.display = 'none';
         });
-        document.addEventListener('keydown', function (event) {
-          if (event.keyCode === window.data.ESC_KEYCODE) {
+        document.addEventListener('keydown', function (evtCard) {
+          if (evtCard.keyCode === window.data.ESC_KEYCODE) {
             window.card.currentCard.style.display = 'none';
           }
         });
