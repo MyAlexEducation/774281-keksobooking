@@ -40,6 +40,9 @@
       element.disabled = false;
     });
   };
+  var adFormRoomNumberInit = function () {
+    adFormRoomNumber.options[0].selected = true;
+  };
   var adFormCapacityInit = function () {
     adFormCapacity.options[0].disabled = true;
     adFormCapacity.options[1].disabled = true;
@@ -78,6 +81,7 @@
 
   var adFormReset = function () {
     adFormAddressInit();
+    adFormRoomNumberInit();
     adFormCapacityInit();
     adFormPriceInit();
     adFormTypeInit();
