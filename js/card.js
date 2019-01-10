@@ -21,7 +21,8 @@
     card.querySelector('.popup__features').textContent = '';
     for (var i = 0; i < building.offer.features.length; i++) {
       var feature = document.createElement('li');
-      feature.textContent = building.offer.features[i];
+      feature.classList.add('popup__feature');
+      feature.classList.add('popup__feature--' + building.offer.features[i]);
       window.data.fragment.appendChild(feature);
     }
     card.querySelector('.popup__features').appendChild(window.data.fragment);
