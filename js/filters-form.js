@@ -57,7 +57,7 @@
       && isBuildingFeature(filtersHousingFeaturesConditioner, building.offer.features);
   };
 
-  filtersForm.addEventListener('change', window.debonce.cancel(function () {
+  var onFiltersFormChange = window.debonce.cancel(function () {
     filtersBuildings = window.data.buildings;
     filtersBuildings = window.data.buildings.filter(isFiltersBuilding);
     if (filtersBuildings.length > MAX_NUMBER_PINS) {
@@ -67,7 +67,9 @@
     window.card.currentCard.style.display = 'none';
     window.pins.deletePins();
     window.pins.showPins();
-  }));
+  });
+
+  filtersForm.addEventListener('change', onFiltersFormChange);
 
   window.filtersForm = {
     MAX_NUMBER_PINS: MAX_NUMBER_PINS,
