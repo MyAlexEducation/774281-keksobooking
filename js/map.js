@@ -2,6 +2,7 @@
 
 (function () {
   var currentPin = window.data.mainPin;
+  var buildingsLoadURL = 'https://js.dump.academy/keksobooking/data';
 
   var showMap = function () {
     window.data.map.classList.remove('map--faded');
@@ -24,10 +25,7 @@
     evt.preventDefault();
 
     if (window.data.map.classList.contains('map--faded')) {
-      window.backend.LoadParameter.method = 'GET';
-      window.backend.LoadParameter.url = 'https://js.dump.academy/keksobooking/data';
-      window.backend.LoadParameter.data = '';
-      window.backend.load(onBuildingsLoad);
+      window.backend.load(buildingsLoadURL, onBuildingsLoad);
     }
 
     var startCoords = {

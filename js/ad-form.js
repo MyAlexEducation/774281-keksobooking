@@ -1,6 +1,8 @@
 'use strict';
 
 (function () {
+  var adFormActionURL = 'https://js.dump.academy/keksobooking';
+
   var adForm = document.querySelector('.ad-form');
   var adFormElements = adForm.elements;
   var adFormRoomNumber = adForm.querySelector('#room_number');
@@ -239,10 +241,8 @@
   });
 
   adForm.addEventListener('submit', function (evt) {
-    window.backend.LoadParameter.method = 'POST';
-    window.backend.LoadParameter.url = 'https://js.dump.academy/keksobooking';
-    window.backend.LoadParameter.data = new FormData(adForm);
-    window.backend.load(successUpLoadAdForm, errorUpLoadAddForm);
+    var data = new FormData(adForm);
+    window.backend.save(adFormActionURL, data, successUpLoadAdForm, errorUpLoadAddForm);
     evt.preventDefault();
   });
 
