@@ -5,11 +5,6 @@
   var ServerCode = {
     OK: 200
   };
-  var LoadParameter = {
-    method: 'POST',
-    url: 'https://js.dump.academy/keksobooking/data',
-    data: null
-  };
 
   var response = function (xhr, time, onSuccess, onError) {
     xhr.responseType = 'json';
