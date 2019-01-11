@@ -24,9 +24,9 @@
     evt.preventDefault();
 
     if (window.data.map.classList.contains('map--faded')) {
-      window.backend.LoadParametr.method = 'GET';
-      window.backend.LoadParametr.url = 'https://js.dump.academy/keksobooking/data';
-      window.backend.LoadParametr.data = '';
+      window.backend.LoadParameter.method = 'GET';
+      window.backend.LoadParameter.url = 'https://js.dump.academy/keksobooking/data';
+      window.backend.LoadParameter.data = '';
       window.backend.load(onBuildingsLoad);
     }
 

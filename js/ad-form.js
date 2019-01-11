@@ -237,9 +237,9 @@
   });
 
   adForm.addEventListener('submit', function (evt) {
-    window.backend.LoadParametr.method = 'POST';
-    window.backend.LoadParametr.url = 'https://js.dump.academy/keksobooking';
-    window.backend.LoadParametr.data = new FormData(adForm);
+    window.backend.LoadParameter.method = 'POST';
+    window.backend.LoadParameter.url = 'https://js.dump.academy/keksobooking';
+    window.backend.LoadParameter.data = new FormData(adForm);
     window.backend.load(successUpLoadAdForm, errorUpLoadAddForm);
     evt.preventDefault();
   });

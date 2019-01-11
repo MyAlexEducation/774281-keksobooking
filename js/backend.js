@@ -5,7 +5,7 @@
   var ServerCode = {
     ok: 200
   };
-  var LoadParametr = {
+  var LoadParameter = {
     method: 'POST',
     url: 'https://js.dump.academy/keksobooking/data',
     data: '' // как явно указать что поле пустое и будет определено позже?
@@ -32,16 +32,16 @@
 
     xhr.timeout = maxLoadTime;
 
-    xhr.open(LoadParametr.method, LoadParametr.url);
-    if (LoadParametr.data) {
-      xhr.send(LoadParametr.data);
+    xhr.open(LoadParameter.method, LoadParameter.url);
+    if (LoadParameter.data) {
+      xhr.send(LoadParameter.data);
     } else {
       xhr.send();
     }
   };
 
   window.backend = {
-    LoadParametr: LoadParametr,
-    load: load,
+    LoadParameter: LoadParameter,
+    load: load
   };
 })();
