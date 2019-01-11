@@ -11,19 +11,23 @@
     window.data.mainPin.style.left = '570px';
     window.data.mainPin.style.top = '375px';
   };
+  var onBuildingsLoad = function (loadBuildings) {
+    window.data.buildings = loadBuildings;
+    window.filtersForm.filtersBuildings = window.data.buildings.filter(window.filtersForm.isFiltersBuilding);
+    if (window.filtersForm.filtersBuildings.length > window.filtersForm.MAX_NUMBER_PINS) {
+      window.filtersForm.filtersBuildings.length = window.filtersForm.MAX_NUMBER_PINS;
+    }
+    window.pins.show(window.filtersForm.filtersBuildings);
+  };
 
   window.data.mainPin.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
 
     if (window.data.map.classList.contains('map--faded')) {
-      window.backend.buildingsLoad(function (loadBuildings) {
-        window.data.buildings = loadBuildings;
-        window.filtersForm.filtersBuildings = window.data.buildings.filter(window.filtersForm.isFiltersBuilding);
-        if (window.filtersForm.filtersBuildings.length > window.filtersForm.MAX_NUMBER_PINS) {
-          window.filtersForm.filtersBuildings.length = window.filtersForm.MAX_NUMBER_PINS;
-        }
-        window.pins.show(window.filtersForm.filtersBuildings);
-      });
+      window.backend.LoadParametr.method = 'GET';
+      window.backend.LoadParametr.url = 'https://js.dump.academy/keksobooking/data';
+      window.backend.LoadParametr.data = '';
+      window.backend.load(onBuildingsLoad);
     }
 
     var startCoords = {

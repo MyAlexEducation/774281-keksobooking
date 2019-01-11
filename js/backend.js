@@ -1,31 +1,17 @@
 'use strict';
 
 (function () {
-  var adFormAction = 'https://js.dump.academy/keksobooking';
-  var getBuildingsURL = 'https://js.dump.academy/keksobooking/data';
-
+  var maxLoadTime = 10000;
   var ServerCode = {
     ok: 200
   };
-  var maxLoadTime = 10000;
-
-  var adFormUpload = function (data, onLoad, onError) {
-    var xhr = new XMLHttpRequest();
-    xhr.responseType = 'json';
-
-    xhr.addEventListener('load', function () {
-      if (xhr.status === ServerCode.ok) {
-        onLoad(xhr.response);
-      } else {
-        onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
-      }
-    });
-
-    xhr.open('POST', adFormAction);
-    xhr.send(data);
+  var LoadParametr = {
+    method: 'POST',
+    url: 'https://js.dump.academy/keksobooking/data',
+    data: '' // как явно указать что поле пустое и будет определено позже?
   };
 
-  var buildingsLoad = function (onLoad, onError) {
+  var load = function (onLoad, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
@@ -36,6 +22,7 @@
         onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
       }
     });
+
     xhr.addEventListener('error', function () {
       onError('Произошла ошибка соединения');
     });
@@ -45,12 +32,16 @@
 
     xhr.timeout = maxLoadTime;
 
-    xhr.open('GET', getBuildingsURL);
-    xhr.send();
+    xhr.open(LoadParametr.method, LoadParametr.url);
+    if (LoadParametr.data) {
+      xhr.send(LoadParametr.data);
+    } else {
+      xhr.send();
+    }
   };
 
   window.backend = {
-    adFormUpload: adFormUpload,
-    buildingsLoad: buildingsLoad
+    LoadParametr: LoadParametr,
+    load: load,
   };
 })();
