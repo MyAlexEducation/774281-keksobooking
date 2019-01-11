@@ -8,7 +8,7 @@
   var LoadParameter = {
     method: 'POST',
     url: 'https://js.dump.academy/keksobooking/data',
-    data: '' // как явно указать что поле пустое и будет определено позже?
+    data: undefined
   };
 
   var load = function (onLoad, onError) {
