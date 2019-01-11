@@ -41,7 +41,7 @@
   };
 
   window.pins = {
-    showPins: showPins,
-    deletePins: deletePins
+    show: showPins,
+    delete: deletePins
   };
 })();

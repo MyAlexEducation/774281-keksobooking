@@ -49,9 +49,9 @@
   };
 
   window.card = {
-    currentCard: currentCard,
-    cardClose: cardClose,
-    createCards: createCards,
-    showCards: showCards,
+    current: currentCard,
+    buttonClose: cardClose,
+    create: createCards,
+    show: showCards,
   };
 })();

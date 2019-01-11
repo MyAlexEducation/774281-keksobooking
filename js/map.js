@@ -22,7 +22,7 @@
         if (window.filtersForm.filtersBuildings.length > window.filtersForm.MAX_NUMBER_PINS) {
           window.filtersForm.filtersBuildings.length = window.filtersForm.MAX_NUMBER_PINS;
         }
-        window.pins.showPins(window.filtersForm.filtersBuildings);
+        window.pins.show(window.filtersForm.filtersBuildings);
       });
     }
 
@@ -71,14 +71,14 @@
     document.addEventListener('mouseup', onMouseUp);
 
     showMap();
-    window.adForm.showAdForm();
+    window.adForm.show();
   });
 
   window.data.map.addEventListener('click', function (evt) {
     var target = evt.target;
     var onDocumentKeydown = function (evtCard) {
       if (evtCard.keyCode === window.data.ESC_KEYCODE) {
-        window.card.currentCard.style.display = 'none';
+        window.card.current.style.display = 'none';
         document.removeEventListener('keydown', onDocumentKeydown);
       }
     };
@@ -88,23 +88,23 @@
         currentPin.classList.remove('map__pin--active');
         currentPin = target;
         currentPin.classList.add('map__pin--active');
-        window.card.currentCard.style.display = 'block';
-        window.card.createCards(window.filtersForm.filtersBuildings, parseInt(target.dataset.PinIndex, 10));
-        window.card.showCards();
-        window.card.currentCard.remove();
-        window.card.currentCard = window.data.map.querySelector('.map__card');
+        window.card.current.style.display = 'block';
+        window.card.create(window.filtersForm.filtersBuildings, parseInt(target.dataset.PinIndex, 10));
+        window.card.show();
+        window.card.current.remove();
+        window.card.current = window.data.map.querySelector('.map__card');
         window.card.cardClose = window.data.map.querySelector('.popup__close');
         window.card.cardClose.addEventListener('click', function () {
-          window.card.currentCard.style.display = 'none';
+          window.card.current.style.display = 'none';
         });
         document.addEventListener('keydown', onDocumentKeydown);
-        window.data.adFormAddress.value = window.card.currentCard.querySelector('.popup__text--address').innerHTML;
+        window.data.adFormAddress.value = window.card.current.querySelector('.popup__text--address').innerHTML;
       }
       target = target.parentNode;
     }
   });
 
   window.map = {
-    hideMap: hideMap
+    hide: hideMap
   };
 })();

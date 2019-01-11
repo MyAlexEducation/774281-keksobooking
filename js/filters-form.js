@@ -64,9 +64,9 @@
       filtersBuildings.length = MAX_NUMBER_PINS;
     }
     window.filtersForm.filtersBuildings = filtersBuildings;
-    window.card.currentCard.style.display = 'none';
-    window.pins.deletePins();
-    window.pins.showPins();
+    window.card.current.style.display = 'none';
+    window.pins.delete();
+    window.pins.show();
   });
 
   filtersForm.addEventListener('change', onFiltersFormChange);

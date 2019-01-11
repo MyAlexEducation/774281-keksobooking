@@ -92,9 +92,9 @@
     afFormAvatarPreviewInit();
     adFormPhotoContainerInit();
 
-    window.pins.deletePins();
-    window.map.hideMap();
-    window.card.currentCard.style.display = 'none';
+    window.pins.delete();
+    window.map.hide();
+    window.card.current.style.display = 'none';
   };
 
   var onDocumentClick = function () {
@@ -286,6 +286,6 @@
   });
 
   window.adForm = {
-    showAdForm: showAdForm
+    show: showAdForm
   };
 })();
