@@ -46,6 +46,7 @@
   var adFormCapacityInit = function () {
     adFormCapacity.options[0].disabled = true;
     adFormCapacity.options[1].disabled = true;
+    adFormCapacity.options[2].disabled = false;
     adFormCapacity.options[2].selected = true;
     adFormCapacity.options[3].disabled = true;
   };
@@ -148,6 +149,7 @@
 
   adFormAddressInit();
   adFormCapacityInit();
+  adFormRoomNumberInit();
   adFormPriceInit();
   adFormTypeInit();
   adFormTimeInit();
