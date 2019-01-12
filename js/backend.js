@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  var maxLoadTime = 10000;
+  var MAX_LOAD_TIME = 10000;
   var ServerCode = {
     OK: 200
   };
@@ -24,7 +24,7 @@
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
 
-    xhr.timeout = maxLoadTime;
+    xhr.timeout = MAX_LOAD_TIME;
   };
 
   var load = function (url, onSuccess, onError) {
