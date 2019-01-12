@@ -6,7 +6,7 @@
     OK: 200
   };
 
-  var response = function (xhr, time, onSuccess, onError) {
+  var response = function (xhr, onSuccess, onError) {
     xhr.responseType = 'json';
 
     xhr.addEventListener('load', function () {
@@ -29,14 +29,14 @@
 
   var load = function (url, onSuccess, onError) {
     var xhr = new XMLHttpRequest();
-    response(xhr, maxLoadTime, onSuccess, onError);
+    response(xhr, onSuccess, onError);
     xhr.open('GET', url);
     xhr.send();
   };
 
   var save = function (url, data, onSuccess, onError) {
     var xhr = new XMLHttpRequest();
-    response(xhr, maxLoadTime, onSuccess, onError);
+    response(xhr, onSuccess, onError);
     xhr.open('POST', url);
     xhr.send(data);
   };
